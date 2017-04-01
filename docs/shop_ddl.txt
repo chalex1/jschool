@@ -1,76 +1,5 @@
 -- ---
 -- Globals
--- ---
-
--- ---
--- Table goods
---
--- ---
-
-CREATE TABLE SYSTEM.goods (
-id NUMBER PRIMARY KEY ,
-name VARCHAR2(100),
-price NUMBER,
-parameter1 VARCHAR2(100),
-parameter2 VARCHAR2(100),
-parameter3 VARCHAR2(100),
-weight NUMBER,
-volume NUMBER,
-quantity NUMBER,
-id_goods_categories NUMBER
-);
-
--- ---
--- Table goods_categories
---
--- ---
-
-
-CREATE TABLE SYSTEM.goods_categories (
-id NUMBER PRIMARY KEY ,
-id_category NUMBER,
-id_goods NUMBER
-);
-
--- ---
--- Table clients
---
--- ---
-
-CREATE TABLE SYSTEM.clients (
-id NUMBER PRIMARY KEY,
-password VARCHAR2(100),
-id_address NUMBER,
-id_user NUMBER
-);
-
--- ---
--- Table orders
---
--- ---
-
-
-CREATE TABLE SYSTEM.orders (
-id NUMBER PRIMARY KEY ,
-payment_method VARCHAR2(100),
-delivery_method VARCHAR2(100),
-payment_status VARCHAR2(100),
-status VARCHAR2(100),
-id_client NUMBER
-);
-
--- ---
--- Table orders_goods
---
--- ---
-
-
-CREATE TABLE SYSTEM.orders_goods (
-id NUMBER PRIMARY KEY ,
-id_goods NUMBER,
-id_order NUMBER,
-price_on_moment NUMBER
-);
 
 -- ---
 -- Table categories
@@ -78,10 +7,11 @@ price_on_moment NUMBER
 -- ---
 
 
-CREATE TABLE SYSTEM.categories (
+CREATE TABLE ESHOP.categories (
 id NUMBER PRIMARY KEY ,
 name VARCHAR2(100)
 );
+
 
 -- ---
 -- Table addresses
@@ -89,7 +19,7 @@ name VARCHAR2(100)
 -- ---
 
 
-CREATE TABLE SYSTEM.addresses (
+CREATE TABLE ESHOP.addresses (
 id NUMBER PRIMARY KEY ,
 country VARCHAR2(100),
 city VARCHAR2(100),
@@ -104,7 +34,7 @@ flat VARCHAR2(100)
 --
 -- ---
 
-CREATE TABLE SYSTEM.accounts (
+CREATE TABLE ESHOP.accounts (
 id NUMBER PRIMARY KEY ,
 name VARCHAR2(100),
 surname VARCHAR2(100),
@@ -113,6 +43,76 @@ password VARCHAR2(100),
 email VARCHAR2(100),
 birthday VARCHAR2(100)
 );
+-- ---
+-- Table goods
+--
+-- ---
+
+CREATE TABLE ESHOP.goods (
+id NUMBER PRIMARY KEY ,
+name VARCHAR2(100),
+price NUMBER,
+parameter1 VARCHAR2(100),
+parameter2 VARCHAR2(100),
+parameter3 VARCHAR2(100),
+weight NUMBER,
+volume NUMBER,
+quantity NUMBER
+);
+
+-- ---
+-- Table goods_categories
+--
+-- ---
+
+
+CREATE TABLE ESHOP.goods_categories (
+id NUMBER PRIMARY KEY ,
+id_category NUMBER CONSTRAINT id_category_fk REFERENCES ESHOP.categories (id),
+id_goods NUMBER CONSTRAINT id_goods_fk REFERENCES ESHOP.goods (id)
+);
+
+-- ---
+-- Table clients
+--
+-- ---
+
+CREATE TABLE ESHOP.clients (
+id NUMBER PRIMARY KEY,
+id_address NUMBER CONSTRAINT id_address_fk REFERENCES ESHOP.addresses (id),
+id_account NUMBER CONSTRAINT id_account_fk REFERENCES ESHOP.accounts (id)
+);
+
+-- ---
+-- Table orders
+--
+-- ---
+
+
+CREATE TABLE ESHOP.orders (
+id NUMBER PRIMARY KEY ,
+payment_method VARCHAR2(100),
+delivery_method VARCHAR2(100),
+payment_status VARCHAR2(100),
+status VARCHAR2(100),
+id_client NUMBER CONSTRAINT id_client_fk REFERENCES ESHOP.clients (id)
+);
+
+-- ---
+-- Table orders_goods
+--
+-- ---
+
+
+CREATE TABLE ESHOP.orders_goods (
+id NUMBER PRIMARY KEY ,
+id_goods NUMBER CONSTRAINT id_goods_fk REFERENCES ESHOP.goods (id),
+id_order NUMBER CONSTRAINT id_order_fk REFERENCES ESHOP.orders (id),
+price_on_moment NUMBER
+);
+
+
+
 
 -- -- ---
 -- -- Foreign Keys
