@@ -1,48 +1,44 @@
-package tshop.back.entities;
+package tshop.back.transports;
 
-import org.hibernate.annotations.GenericGenerator;
+import tshop.back.entities.Address;
 
-import javax.persistence.*;
+import javax.persistence.Column;
 
 /**
- * Created by Роднуля on 30.03.2017.
+ * Created by Роднуля on 01.04.2017.
  */
-@Entity
-@Table(name="ESHOP.ADDRESSES")
-public class Address {
-//    CREATE TABLE ESHOP.addresses (
-//    id NUMBER PRIMARY KEY ,
-//    country VARCHAR2(100),
-//    city VARCHAR2(100),
-//    postcode VARCHAR2(100),
-//    street VARCHAR2(100),
-//    home VARCHAR2(100),
-//    flat VARCHAR2(100)
-//);
-
-    @Id
-    @Column
-    @GenericGenerator(name = "increment", strategy = "increment")
-    @GeneratedValue(generator = "increment")
+public class AddressTransport {
     long id;
 
-    @Column
-    String country;
+    String country = "";
 
-    @Column
-    String city;
 
-    @Column
-    String postcode;
+    String city= "";
 
-    @Column
-    String street;
 
-    @Column
-    String home;
+    String postcode= "";
 
-    @Column
-    String flat;
+
+    String street= "";
+
+
+    String home= "";
+
+
+    String flat= "";
+
+    public AddressTransport() {
+    }
+
+    public AddressTransport(Address address) {
+        this.id = address.getId();
+        this.country = address.getCountry();
+        this.city = address.getCity();
+        this.postcode = getPostcode();
+        this.street = getStreet();
+        this.home = getHome();
+        this.flat = getFlat();
+    }
 
     public long getId() {
         return id;

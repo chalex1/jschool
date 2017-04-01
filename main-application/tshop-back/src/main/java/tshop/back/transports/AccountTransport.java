@@ -10,10 +10,10 @@ public class AccountTransport {
 
 
 
-    String name;
+    String name= "";
 
 
-    String surname;
+    String surname= "";
 
 
     String login;
@@ -22,10 +22,10 @@ public class AccountTransport {
     String password;
 
 
-    String email;
+    String email= "";
 
 
-    String birthday;
+    String birthday= "";
 
     public AccountTransport() {
 

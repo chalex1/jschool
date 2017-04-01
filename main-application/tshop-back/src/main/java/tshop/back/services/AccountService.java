@@ -25,6 +25,7 @@ public class AccountService {
         this.accountRepository = accountRepository;
     }
 
+    @Transactional
     public List<AccountTransport> getAllAccounts(){
 //            List<AccountTransport> res = new LinkedList<AccountTransport>();
 //            res.add(new AccountTransport());
@@ -55,10 +56,10 @@ public class AccountService {
         account.setSurname(atr.getSurname());
         account.setBirthday(atr.getBirthday());
         account.setPassword(atr.getPassword());
-System.out.println("trying to save1");
+System.out.println("trying to save1"+account.getId());
         accountRepository.save(account);
+        System.out.println("now id is"+account.getId());
+        return this.getAccount(account.getId());
 
-//        return this.getAccount(account.getId());
-return new AccountTransport();
     }
 }
