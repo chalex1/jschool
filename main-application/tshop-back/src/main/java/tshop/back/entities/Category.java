@@ -1,5 +1,7 @@
 package tshop.back.entities;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.naming.Name;
 import javax.persistence.*;
 
@@ -7,14 +9,12 @@ import javax.persistence.*;
  * Created by Роднуля on 30.03.2017.
  */
 @Entity
-@Table(name = "categories", schema= "ESHOP")
+@Table(name = "ESHOP.CATEGORIES")
 public class Category {
-    //    CREATE TABLE ESHOP.categories (
-//    id NUMBER PRIMARY KEY ,
-//    name VARCHAR2(100)
-//);
+
     @Id
-    @GeneratedValue
+    @GenericGenerator(name = "increment", strategy = "increment")
+    @GeneratedValue(generator = "increment")
     @Column
     long id;
 

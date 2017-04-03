@@ -1,55 +1,39 @@
-package tshop.back.entities;
+package tshop.back.transports;
 
-import org.hibernate.annotations.GenericGenerator;
-
-import javax.persistence.*;
+import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 
 /**
- * Created by Роднуля on 28.03.2017.
+ * Created by Роднуля on 02.04.2017.
  */
-@Entity
-@Table(name="ESHOP.GOODS")
-public class Goods {
-
-
-    @Id
-    @GeneratedValue(generator = "increment")
-    @GenericGenerator(name = "increment", strategy = "increment")
-    @Column
+public class GoodsTransport {
     long id;
 
-    @Column
-    String name;
 
-    @Column
+    String name="";
+
+
     long price;
 
-    @Column
-    String parameter1;
 
-    @Column
-    String parameter2;
+    String parameter1="";
 
-    @Column
-    String parameter3;
 
-    @Column
+    String parameter2="";
+
+
+    String parameter3="";
+
+
     long weight;
 
-    @Column
+
     long volume;
 
-    @Column
+
     long quantity;
 
-    @Column
-    @ManyToMany
-    @JoinTable(name = "ESHOP.GOODS_CATEGORIES",
-            joinColumns = {@JoinColumn(name = "ID_GOODS") },
-            inverseJoinColumns = { @JoinColumn(name = "ID_CATEGORY") })
-    List<Category> categories;
+    List<Long> categories=new LinkedList<Long>();
 
     public long getId() {
         return id;
@@ -123,12 +107,11 @@ public class Goods {
         this.quantity = quantity;
     }
 
-
-    public List<Category> getCategoryes() {
+    public List<Long> getCategories() {
         return categories;
     }
 
-    public void setCategoryes(List<Category> categoryes) {
-        this.categories = categoryes;
+    public void setCategories(List<Long> categories) {
+        this.categories = categories;
     }
 }

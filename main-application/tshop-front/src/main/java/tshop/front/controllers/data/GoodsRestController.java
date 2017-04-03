@@ -1,4 +1,4 @@
-package tshop.front.controllers.rest;
+package tshop.front.controllers.data;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -6,33 +6,35 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import tshop.back.services.AddressService;
-import tshop.back.transports.AddressTransport;
+import tshop.back.services.GoodsService;
+import tshop.back.transports.GoodsTransport;
+
 
 import java.util.List;
 
 /**
- * Created by Роднуля on 02.04.2017.
+ * Created by Роднуля on 30.03.2017.
  */
 @Component
 @RestController
-@RequestMapping(path = "data/addresses")
-public class AddressRestController {
+@RequestMapping(path = "data/goods")
+public class GoodsRestController {
 
-    AddressService addressService;
+    private GoodsService goodsService;
 
     @Autowired
-    public AddressRestController(AddressService addressService) {
-        this.addressService = addressService;
+    public GoodsRestController(GoodsService goodsService) {
+        this.goodsService = goodsService;
     }
 
+
     @RequestMapping(method = RequestMethod.GET, produces = "application/json")
-    public List<AddressTransport> getAddresses(){
-        return addressService.getAllAddresses();
+    public List<GoodsTransport> getList() {
+        return goodsService.getAllGoods();
     }
 
     @RequestMapping(method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
-    public AddressTransport createAddress(@RequestBody AddressTransport address){
-        return addressService.createAddress(address);
+    public GoodsTransport createGoods(@RequestBody GoodsTransport transport){
+        return goodsService.createGoods(transport);
     }
 }

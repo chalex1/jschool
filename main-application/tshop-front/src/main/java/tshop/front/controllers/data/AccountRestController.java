@@ -1,4 +1,4 @@
-package tshop.front.controllers.rest;
+package tshop.front.controllers.data;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 import tshop.back.services.AccountService;
 import tshop.back.transports.AccountTransport;
 
-import java.util.LinkedList;
 import java.util.List;
 
 /**

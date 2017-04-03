@@ -16,10 +16,10 @@ public class AccountTransport {
     String surname= "";
 
 
-    String login;
+    String login="";
 
 
-    String password;
+    String password="";
 
 
     String email= "";

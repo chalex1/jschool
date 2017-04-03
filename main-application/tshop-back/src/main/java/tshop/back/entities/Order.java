@@ -1,43 +1,45 @@
 package tshop.back.entities;
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by Роднуля on 30.03.2017.
  */
-@Table(name = "orders", schema = "ESHOP")
+@Table(name = "ESHOP.ORDERS")
 @Entity
 public class Order {
-    /**
-     * CREATE TABLE ESHOP.orders (
-     * id NUMBER PRIMARY KEY ,
-     * payment_method VARCHAR2(100),
-     * delivery_method VARCHAR2(100),
-     * payment_status VARCHAR2(100),
-     * status VARCHAR2(100),
-     * id_client NUMBER CONSTRAINT id_client_fk REFERENCES ESHOP.clients (id)
-     * );
-     */
+
 
     @Id
     @Column
-    @GeneratedValue
+    @GenericGenerator(name = "increment", strategy = "increment")
+    @GeneratedValue(generator = "increment")
     long id;
 
-    @Column(name = "payment_method")
+    @Column(name = "PAYMENT_METHOD")
     String paymentMethod;
 
-    @Column(name = "delivery_method")
+    @Column(name="DELIVERY_METHOD")
     String deliveryMethod;
 
-    @Column(name = "payment_status")
+    @Column(name="PAYMENT_STATUS")
     String paymentStatus;
 
-    @Column(name = "status")
+    @Column(name="STATUS")
     String status;
 
-    @Column(name = "id_client")
-    long idClient;
+    @ManyToOne
+    @JoinColumn(name = "ID_CLIENT")
+    Client client;
+
+    @ManyToMany
+    @JoinTable(name="ESHOP.ORDERS_GOODS",
+            joinColumns = {@JoinColumn(name="ID_ORDER")},
+            inverseJoinColumns = {@JoinColumn(name="ID_GOODS")})
+    List<Goods> goods;
 
     public long getId() {
         return id;
@@ -79,11 +81,19 @@ public class Order {
         this.status = status;
     }
 
-    public long getIdClient() {
-        return idClient;
+    public Client getClient() {
+        return client;
     }
 
-    public void setIdClient(long idClient) {
-        this.idClient = idClient;
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public List<Goods> getGoods() {
+        return goods;
+    }
+
+    public void setGoods(List<Goods> goods) {
+        this.goods = goods;
     }
 }
