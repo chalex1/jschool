@@ -1,6 +1,7 @@
 package tshop.back.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tshop.back.entities.Goods;
@@ -28,15 +29,22 @@ public class GoodsService {
         this.categoryRepository = categoryRepository;
     }
 
-
-    public List<GoodsTransport> getAllGoods() {
-        return goodsRepository.findAll().stream().map(goods -> {
+    public List<GoodsTransport> getGoodsPage(String name, long priceFrom, long priceTo, int quantityFrom, int page, int size) {
+        return goodsRepository.findPageWithFilter(name, priceFrom, priceTo, quantityFrom, new PageRequest(page, size)).stream().map(goods -> {
             GoodsTransport transport = this.goodsEntityToTransport(goods);
             return transport;
         }).collect(Collectors.toList());
     }
 
-    //todo check id in goodscat table
+
+    public List<GoodsTransport> getAllGoodsPage(int page, int size) {
+        return goodsRepository.findPage(new PageRequest(page,size)).stream().map(goods -> {
+            GoodsTransport transport = this.goodsEntityToTransport(goods);
+            return transport;
+        }).collect(Collectors.toList());
+    }
+
+
     public GoodsTransport createGoods(GoodsTransport transport) {
         Goods goods = new Goods();
         goods.setName(transport.getName());
@@ -47,6 +55,7 @@ public class GoodsService {
         goods.setVolume(transport.getVolume());
         goods.setPrice(transport.getPrice());
         goods.setQuantity(transport.getQuantity());
+        goods.setDeleted(transport.isDeleted() ? 1 : 0);
         goods.setCategoryes(categoryRepository.findAll(transport.getCategories()));
         goodsRepository.save(goods);
         return this.goodsEntityToTransport(goodsRepository.findOne(goods.getId()));
@@ -64,6 +73,7 @@ public class GoodsService {
         transport.setVolume(goods.getVolume());
         transport.setWeight(goods.getWeight());
         transport.setCategories(getCategoriesIds(goods));
+        transport.setDeleted(goods.getDeleted() == 1);
         return transport;
     }
 

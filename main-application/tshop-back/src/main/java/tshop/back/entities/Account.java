@@ -48,6 +48,9 @@ public class Account {
     @Column
     String birthday;
 
+    @Column
+    String type;
+
     public long getId() {
         return id;
     }
@@ -102,5 +105,13 @@ public class Account {
 
     public void setBirthday(String birthday) {
         this.birthday = birthday;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

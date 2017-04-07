@@ -45,6 +45,9 @@ public class Goods {
     long quantity;
 
     @Column
+    long deleted;
+
+    @Column
     @ManyToMany
     @JoinTable(name = "ESHOP.GOODS_CATEGORIES",
             joinColumns = {@JoinColumn(name = "ID_GOODS") },
@@ -130,5 +133,13 @@ public class Goods {
 
     public void setCategoryes(List<Category> categoryes) {
         this.categories = categoryes;
+    }
+
+    public long getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(long deleted) {
+        this.deleted = deleted;
     }
 }

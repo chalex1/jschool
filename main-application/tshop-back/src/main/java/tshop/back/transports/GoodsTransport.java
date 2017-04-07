@@ -33,6 +33,8 @@ public class GoodsTransport {
 
     long quantity;
 
+    boolean deleted;
+
     List<Long> categories=new LinkedList<Long>();
 
     public long getId() {
@@ -113,5 +115,13 @@ public class GoodsTransport {
 
     public void setCategories(List<Long> categories) {
         this.categories = categories;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 }

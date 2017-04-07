@@ -17,13 +17,13 @@ import java.util.List;
 @Component
 @RestController
 @RequestMapping(path = "data/accounts")
-public class AccountRestController {
+public class AccountDataController {
 
 
     private AccountService accountService;
 
     @Autowired
-    public AccountRestController(AccountService accountService) {
+    public AccountDataController(AccountService accountService) {
         this.accountService = accountService;
     }
 

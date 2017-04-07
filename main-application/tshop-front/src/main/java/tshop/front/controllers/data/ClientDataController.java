@@ -16,13 +16,13 @@ import java.util.List;
 @Component
 @RestController
 @RequestMapping(path = "data/clients")
-public class ClientRestController {
+public class ClientDataController {
 
 
     private ClientService clientService;
 
     @Autowired
-    public ClientRestController(ClientService clientService) {
+    public ClientDataController(ClientService clientService) {
         this.clientService = clientService;
     }
 

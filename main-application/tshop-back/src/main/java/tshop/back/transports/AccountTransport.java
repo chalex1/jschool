@@ -27,6 +27,8 @@ public class AccountTransport {
 
     String birthday= "";
 
+    String type = "";
+
     public AccountTransport() {
 
     }
@@ -39,6 +41,7 @@ public class AccountTransport {
         this.password = account.getPassword();
         this.email = account.getEmail();
         this.birthday = account.getBirthday();
+        this.type = account.getType();
     }
 
     public long getId() {
@@ -95,5 +98,13 @@ public class AccountTransport {
 
     public void setBirthday(String birthday) {
         this.birthday = birthday;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

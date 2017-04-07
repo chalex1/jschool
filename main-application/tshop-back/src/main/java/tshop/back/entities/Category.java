@@ -21,6 +21,9 @@ public class Category {
     @Column
     String name;
 
+    @Column
+    int deleted;
+
     public long getId() {
         return id;
     }
@@ -35,5 +38,13 @@ public class Category {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(int deleted) {
+        this.deleted = deleted;
     }
 }
