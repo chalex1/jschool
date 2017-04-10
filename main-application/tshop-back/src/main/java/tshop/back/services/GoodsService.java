@@ -29,8 +29,12 @@ public class GoodsService {
         this.categoryRepository = categoryRepository;
     }
 
-    public List<GoodsTransport> getGoodsPage(String name, long priceFrom, long priceTo, int quantityFrom, int page, int size) {
-        return goodsRepository.findPageWithFilter(name, priceFrom, priceTo, quantityFrom, new PageRequest(page, size)).stream().map(goods -> {
+    public List<GoodsTransport> getGoodsPage(String name,  Integer quantityFrom, Integer page, Integer size) {
+        return goodsRepository.findPageWithFilter(
+                defaultName(name),
+                0L,
+                new PageRequest(page-1, size)
+        ).stream().map(goods -> {
             GoodsTransport transport = this.goodsEntityToTransport(goods);
             return transport;
         }).collect(Collectors.toList());
@@ -38,10 +42,16 @@ public class GoodsService {
 
 
     public List<GoodsTransport> getAllGoodsPage(int page, int size) {
-        return goodsRepository.findPage(new PageRequest(page,size)).stream().map(goods -> {
+        return goodsRepository.findPage(
+                new PageRequest(page-1,size)
+        ).stream().map(goods -> {
             GoodsTransport transport = this.goodsEntityToTransport(goods);
             return transport;
         }).collect(Collectors.toList());
+    }
+
+    public GoodsTransport getOne(Long id){
+        return this.goodsEntityToTransport(goodsRepository.findOne(id));
     }
 
 
@@ -58,7 +68,7 @@ public class GoodsService {
         goods.setDeleted(transport.isDeleted() ? 1 : 0);
         goods.setCategoryes(categoryRepository.findAll(transport.getCategories()));
         goodsRepository.save(goods);
-        return this.goodsEntityToTransport(goodsRepository.findOne(goods.getId()));
+        return getOne(goods.getId());
     }
 
     private GoodsTransport goodsEntityToTransport(Goods goods) {
@@ -82,4 +92,19 @@ public class GoodsService {
             return category.getId();
         }).collect(Collectors.toList());
     }
+
+    private String defaultName(String name){
+        return name==null||name.isEmpty()?"%":"%"+name+"%";
+    }
+
+//    private Long defaultPriceFrom(Long priceFrom){
+//        return priceFrom==null||priceFrom<0?0L:priceFrom;
+//    }
+//
+//    private Long defaultPriceTo(Long priceTo){
+//        return priceTo==null||priceTo<0?Long.MAX_VALUE:priceTo;
+//    }
+//    private Integer defaultQuantity(Integer q){
+//        return q==null||q<0? 0:q;
+//    }
 }

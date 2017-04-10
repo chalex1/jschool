@@ -33,7 +33,10 @@ public class GoodsDataController {
                                         @RequestParam(name = "page", defaultValue = "1") int page,
                                         @RequestParam(name = "size", defaultValue = "10") int size
                                         ) {
-        return goodsService.getGoodsPage(name, priceFrom, priceTo, quantityFrom, page, size);
+        if(name==null&&priceFrom==null&&priceTo==null&&quantityFrom==null){
+            return goodsService.getAllGoodsPage(page,size);
+        }
+        return goodsService.getGoodsPage(name, quantityFrom, page, size);
     }
 
     @RequestMapping(method = RequestMethod.POST, produces = "application/json", consumes = "application/json")

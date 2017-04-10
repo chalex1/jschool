@@ -11,11 +11,20 @@
     <jsp:include page="/WEB-INF/parts/head.jsp"></jsp:include>
 </head>
 <body>
-    <jsp:include page="/WEB-INF/parts/menu.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/parts/menu.jsp"></jsp:include>
 
-    goods so goods
+<div>
+    Название <input type="text" class="filter-goods-name"/>
+    Цена от <input type="text" class="filter-goods-price-from"/>
+    Цена до <input type="text" class="filter-goods-price-to"/>
+    Показывать пустые <input type="checkbox" class="filler-goods-show-empty"/>
+    <input type="button" class="find-goods-btn" value="Find"/>
+</div>
 
-    <jsp:include page="/WEB-INF/parts/footer.jsp"></jsp:include>
+<input type="button" value="Add" class="add-new-goods-btn"/>
+<div class="goods"></div>
 
+<jsp:include page="/WEB-INF/parts/footer.jsp"></jsp:include>
+<script src="static/js/goods.js"></script>
 </body>
 </html>

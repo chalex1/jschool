@@ -52,12 +52,11 @@
             <artifactId>ojdbc7</artifactId>
             <version>12.1.0</version>
         </dependency>
-        <!--<dependency>-->
-            <!--<groupId>com.oracle</groupId>-->
-            <!--<artifactId>orai18n</artifactId>-->
-            <!--<version>10.1.0.2</version>-->
-            <!--&lt;!&ndash;<version>12.1.0</version>&ndash;&gt;-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>orai18n</artifactId>
+            <version>12.1.0</version>
+        </dependency>
 
 
     </dependencies>
