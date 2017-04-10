@@ -28,22 +28,56 @@ public class CategoryService {
     @Transactional
     public List<CategoryTransport> getAllCategories() {
         return categoryRepository.findAll().stream().map(category -> {
-            CategoryTransport categoryTransport = new CategoryTransport();
-            categoryTransport.setId(category.getId());
-            categoryTransport.setName(category.getName());
-            return categoryTransport;
+            return getCategoryTransport(category);
         }).collect(Collectors.toList());
     }
 
-    @Transactional
-    public CategoryTransport createCategory(CategoryTransport ctr) {
-        Category category = new Category();
+    private CategoryTransport getCategoryTransport(Category category) {
+        CategoryTransport categoryTransport = new CategoryTransport();
+        categoryTransport.setId(category.getId());
+        categoryTransport.setName(category.getName());
+        return categoryTransport;
+    }
 
+//    @Transactional
+//    public CategoryTransport createCategory(CategoryTransport ctr) {
+//        Category category = new Category();
+//
+//        category.setName(ctr.getName());
+//        categoryRepository.save(category);
+//        ctr.setId(category.getId());
+//        ctr.setName(category.getName());
+//        return ctr;
+//
+//    }
+
+    @Transactional
+    public CategoryTransport saveCategory(CategoryTransport ctr) {
+        Category category = new Category();
+        category.setId(ctr.getId());
         category.setName(ctr.getName());
         categoryRepository.save(category);
         ctr.setId(category.getId());
         ctr.setName(category.getName());
         return ctr;
+    }
 
+    @Transactional
+    public boolean deleteCategory(long id){
+
+        Category category = categoryRepository.getOne(id);
+        if(category!=null){
+            category.setDeleted(1);
+            categoryRepository.save(category);
+            return true;
+        }
+
+        return false;
+    }
+
+    @Transactional
+    public CategoryTransport getOne(long id){
+        Category category = categoryRepository.findOne(id);
+        return getCategoryTransport(category);
     }
 }

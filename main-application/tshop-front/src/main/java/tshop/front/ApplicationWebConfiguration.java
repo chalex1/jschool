@@ -18,10 +18,16 @@ import org.springframework.web.servlet.view.
 @ComponentScan("tshop.front.controllers")
 public class ApplicationWebConfiguration extends WebMvcConfigurerAdapter{
 
+//    @Override
+//    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+//        registry.addResourceHandler("/WEB-INF/views/**")
+//                .addResourceLocations("/views/");
+//    }
+
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/WEB-INF/views/**")
-                .addResourceLocations("/views/");
+        registry.addResourceHandler("/static/**")
+                .addResourceLocations("/static/");
     }
 
     @Bean

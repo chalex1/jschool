@@ -5,4 +5,14 @@
   Time: 21:44
   To change this template use File | Settings | File Templates.
 --%>
-<div>menu</div>
+
+<div class="menu">
+    <ul class="menuclass">
+        <li><a href="/">Home</a></li>
+        <li><a href="goods">Goods</a></li>
+        <li><a href="orders">Orders</a></li>
+        <li><a href="categories">Categories</a></li>
+    </ul>
+</div>
+<div id="errorMessage"></div>
+<script>var ctx = "${pageContext.request.contextPath}"</script>
