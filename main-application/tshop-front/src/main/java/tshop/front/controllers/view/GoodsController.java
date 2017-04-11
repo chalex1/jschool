@@ -1,20 +1,31 @@
 package tshop.front.controllers.view;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Created by Роднуля on 27.03.2017.
  */
 @Controller
-@RequestMapping("/goods")
 public class GoodsController {
 
-    @RequestMapping( method= RequestMethod.GET)
+    @RequestMapping( path="/goods", method= RequestMethod.GET)
     public String home() {
-        System.out.println("we re in the controller");
         return "goods";
+    }
+
+    @RequestMapping(path="/goodsnew", method = RequestMethod.GET)
+    public String goodsNew(){
+        return "goodsnew";
+    }
+
+    @RequestMapping(path="/goodsdetailed", method = RequestMethod.GET)
+    public String goodsDetailed(Model model, @RequestParam(name="id") Long id){
+        model.addAttribute("id", id);
+        return "goodsDetailed";
     }
 }

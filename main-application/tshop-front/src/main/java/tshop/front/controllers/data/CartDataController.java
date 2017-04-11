@@ -50,10 +50,10 @@ public class CartDataController {
             HashMap<Long, Integer> cart = (HashMap<Long, Integer>) session.getAttribute(CLIENTS_CART);
             for (Long id : cart.keySet()) {
                 GoodsTransport gt = goodsService.getOne(id);
-                if (gt != null) {
+                if (gt != null&&cart.get(id)>0) {
                     CartTransport cartTransport = new CartTransport();
                     cartTransport.setGoodsTransport(gt);
-                    cartTransport.setQuantity(cart.get(id));
+                    cartTransport.setQuantity(1);//cart.get(id)
                     cartTransportList.add(cartTransport);
                 }
             }
@@ -61,6 +61,10 @@ public class CartDataController {
         return cartTransportList;
 
     }
+@RequestMapping(path="data/cart", method = RequestMethod.DELETE)
+public void makeCartEmpty(HttpSession session){
+    session.setAttribute(CLIENTS_CART, new HashMap<Long, Integer>());
+}
 
     //init the cart
 

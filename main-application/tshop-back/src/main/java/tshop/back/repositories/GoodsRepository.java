@@ -16,17 +16,17 @@ import java.util.List;
 @Transactional
 public interface GoodsRepository extends JpaRepository<Goods, Long> {
 
-//    @Query("SELECT g FROM Goods AS g " +
-//            "WHERE g.name LIKE :name " +
-////            "AND g.price>=:priceFrom " +
-////            "AND g.price <= :priceTo " +
-//            "AND g.quantity >= :quantityFrom " +
-//            "AND g.deleted = 0 ")
-//    List<Goods> findPageWithFilter(@Param("name") String name,
-////                                   @Param("priceFrom") long priceFrom,
-////                                   @Param("priceTo") long priceTo,
-//                                   @Param("quantityFrom") int quantityFrom,
-//                                   Pageable pageable);
+    @Query("SELECT g FROM Goods AS g " +
+            "WHERE g.name LIKE :name " +
+            "AND g.price>=:priceFrom " +
+            "AND g.price <= :priceTo " +
+            "AND g.quantity >= :quantityFrom " +
+            "AND g.deleted = 0 ")
+    List<Goods> findPageWithFilter(@Param("name") String name,
+                                   @Param("priceFrom") Long priceFrom,
+                                   @Param("priceTo") Long priceTo,
+                                   @Param("quantityFrom") Long quantityFrom,
+                                   Pageable pageable);
 
     @Query("SELECT g FROM Goods AS g " +
             "WHERE g.name LIKE :name " +

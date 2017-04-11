@@ -7,6 +7,7 @@ import tshop.back.services.GoodsService;
 import tshop.back.transports.GoodsTransport;
 
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -29,18 +30,23 @@ public class GoodsDataController {
     public List<GoodsTransport> getList(@RequestParam(name = "name", required = false) String name,
                                         @RequestParam(name = "priceFrom", required = false) Long priceFrom,
                                         @RequestParam(name = "priceTo", required = false) Long priceTo,
-                                        @RequestParam(name = "quantityFrom", required = false) Integer quantityFrom,
+                                        @RequestParam(name = "quantityFrom", required = false) Long quantityFrom,
                                         @RequestParam(name = "page", defaultValue = "1") int page,
                                         @RequestParam(name = "size", defaultValue = "10") int size
-                                        ) {
-        if(name==null&&priceFrom==null&&priceTo==null&&quantityFrom==null){
-            return goodsService.getAllGoodsPage(page,size);
+    ) {
+        List<GoodsTransport> goodsList = new LinkedList<>();
+        if (name == null && priceFrom == null && priceTo == null && quantityFrom == null) {
+            goodsList = goodsService.getAllGoodsPage(page, size);
+        } else if (priceFrom == null && priceTo == null) {
+            goodsList = goodsService.getGoodsPage(name, quantityFrom, page, size);
+        } else {
+            goodsList = goodsService.getGoodsPage(name, quantityFrom, page, size);
         }
-        return goodsService.getGoodsPage(name, quantityFrom, page, size);
+        return goodsList;
     }
 
-    @RequestMapping(method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
+    @RequestMapping(method = {RequestMethod.POST, RequestMethod.PUT}, produces = "application/json", consumes = "application/json")
     public GoodsTransport createGoods(@RequestBody GoodsTransport transport) {
-        return goodsService.createGoods(transport);
+        return goodsService.saveGoods(transport);
     }
 }

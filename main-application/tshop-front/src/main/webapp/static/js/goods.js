@@ -9,7 +9,7 @@
 
     var createGoodsList = function (goods) {
         jQuery(".goods").empty();
-        var detailedUrl = ctx+"/goodsDetailed&id=";
+        var detailedUrl = ctx+"/goodsdetailed&id=";
         for (var i = 0; i < goods.length; i++) {
             var row = jQuery("<div></div>");
             var strhtml = [];
@@ -21,7 +21,7 @@
             );
             var rbody = jQuery(strhtml.join(""));
             row.append(rbody);
-            var rdeletebtn = jQuery("<input type=button value='Delete'/>")
+            var rdeletebtn = jQuery("<input type='button' value='Delete'/>")
             rdeletebtn.click(i,function (e) {
                 jQuery.ajax({
                     url: ctx + "/data/goods?id=" + goods[e.data].id,
@@ -35,6 +35,22 @@
                 });
             });
             row.append(rdeletebtn);
+            var raddbtn = jQuery("<input type='button' value = 'Add To Cart'/>")
+
+            if(goods[i].quantity>0){
+            raddbtn.click(goods[i].id,function (e) {
+                jQuery.ajax({
+                    url: ctx+"/data/cart?id="+e.data+"&quantity=1",
+                    type: "POST",
+                    failure: function () {
+                        errorMessageDiv.text("Problem with adding to cart");
+                    }
+                });
+            });}
+            else{
+                raddbtn.attr("disabled", true);
+            }
+            row.append(raddbtn);
             jQuery(".goods").append(row);
         }
     };

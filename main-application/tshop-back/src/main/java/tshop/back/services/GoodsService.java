@@ -29,10 +29,23 @@ public class GoodsService {
         this.categoryRepository = categoryRepository;
     }
 
-    public List<GoodsTransport> getGoodsPage(String name,  Integer quantityFrom, Integer page, Integer size) {
+    public List<GoodsTransport> getGoodsPage(String name, Long priceFrom, Long priceTo,  Long quantityFrom, Integer page, Integer size) {
         return goodsRepository.findPageWithFilter(
                 defaultName(name),
-                0L,
+                defaultPriceFrom(priceFrom),
+                defaultPriceTo(priceTo),
+                defaultQuantity(quantityFrom),
+                new PageRequest(page-1, size)
+        ).stream().map(goods -> {
+            GoodsTransport transport = this.goodsEntityToTransport(goods);
+            return transport;
+        }).collect(Collectors.toList());
+    }
+
+    public List<GoodsTransport> getGoodsPage(String name,  Long quantityFrom, Integer page, Integer size) {
+        return goodsRepository.findPageWithFilter(
+                defaultName(name),
+                defaultQuantity(quantityFrom),
                 new PageRequest(page-1, size)
         ).stream().map(goods -> {
             GoodsTransport transport = this.goodsEntityToTransport(goods);
@@ -55,8 +68,11 @@ public class GoodsService {
     }
 
 
-    public GoodsTransport createGoods(GoodsTransport transport) {
+    public GoodsTransport saveGoods(GoodsTransport transport) {
         Goods goods = new Goods();
+        if(transport.getId()!=0){
+            goods.setId(transport.getId());
+        }
         goods.setName(transport.getName());
         goods.setWeight(transport.getWeight());
         goods.setParameter1(transport.getParameter1());
@@ -97,14 +113,14 @@ public class GoodsService {
         return name==null||name.isEmpty()?"%":"%"+name+"%";
     }
 
-//    private Long defaultPriceFrom(Long priceFrom){
-//        return priceFrom==null||priceFrom<0?0L:priceFrom;
-//    }
-//
-//    private Long defaultPriceTo(Long priceTo){
-//        return priceTo==null||priceTo<0?Long.MAX_VALUE:priceTo;
-//    }
-//    private Integer defaultQuantity(Integer q){
-//        return q==null||q<0? 0:q;
-//    }
+    private Long defaultPriceFrom(Long priceFrom){
+        return priceFrom==null||priceFrom<0?0L:priceFrom;
+    }
+
+    private Long defaultPriceTo(Long priceTo){
+        return priceTo==null||priceTo<0?Long.MAX_VALUE:priceTo;
+    }
+    private Long defaultQuantity(Long q){
+        return q==null||q<0? 0L:q;
+    }
 }

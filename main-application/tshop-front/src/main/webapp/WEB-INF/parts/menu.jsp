@@ -12,7 +12,9 @@
         <li><a href="goods">Goods</a></li>
         <li><a href="orders">Orders</a></li>
         <li><a href="categories">Categories</a></li>
+        <li><a href="cart">Cart</a></li>
     </ul>
 </div>
-<div id="errorMessage"></div>
+<span id="errorMessage"></span>
 <script>var ctx = "${pageContext.request.contextPath}"</script>
+<br>
