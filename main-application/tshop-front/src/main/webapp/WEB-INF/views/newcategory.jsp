@@ -13,11 +13,16 @@
 <body>
 <jsp:include page="/WEB-INF/parts/menu.jsp"></jsp:include>
 
-Введите название новой категории:
-
-<div>
-    <input type="text" class="newcategory" maxlength="50"/>
-    <input type="button" class="sendnewcategorybtn" value="Добавить"/>
+<div class="container">
+    <div class="col-sm-12 col-lg-6">
+        <h3>New category:</h3>
+        <div class="form-group">
+            <label>Category name</label>
+            <input type="text" class="newcategory form-control" maxlength="50"/>
+        </div>
+        <input type="button" class="sendnewcategorybtn btn btn-default" value="Add"/>
+        <input type="button" class="cancel-save-btn btn btn-default" value="Cancel"/>
+    </div>
 </div>
 
 <jsp:include page="/WEB-INF/parts/footer.jsp"></jsp:include>

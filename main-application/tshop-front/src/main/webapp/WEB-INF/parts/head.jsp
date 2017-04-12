@@ -6,9 +6,10 @@
   To change this template use File | Settings | File Templates.
 --%>
 
-        <title>EShop</title>
-        <link href="static/styles/bootstrap.css" rel="stylesheet" media="screen" type="text/css">
-        <link href="static/styles/main.css" rel="stylesheet" type="text/css">
-        <script src="static/js/jquery.js"></script>
+<title>Two Pedals</title>
+<link href="static/styles/bootstrap.css" rel="stylesheet" media="screen" type="text/css">
+<link href="static/styles/main.css" rel="stylesheet" type="text/css">
+<script src="static/js/jquery.js"></script>
+<script src="static/js/bootstrap.js"></script>
 
 

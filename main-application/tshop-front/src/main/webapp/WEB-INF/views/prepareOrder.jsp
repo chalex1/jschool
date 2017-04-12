@@ -13,16 +13,37 @@
 <body>
 <jsp:include page="/WEB-INF/parts/menu.jsp"></jsp:include>
 
-<div>
-    Choose options:<br>
-    <input type="radio" class="payment-method" name="payment-method" value="CASH" checked/> Cash <br>
-    <input type="radio" class="payment-method" name="payment-method" value="CARD"/> Card <br>
-    <br>
+<div class="container">
+    <h3>Choose options:</h3>
+    <h4>Payment method</h4>
+    <div class="radio">
+        <label>
+            <input type="radio" class="payment-method" name="payment-method" value="CASH" checked/>
+            Cash
+        </label>
+    </div>
+    <div class="radio">
+        <label>
+            <input type="radio" class="payment-method" name="payment-method" value="CARD"/>
+            Card
+        </label>
+    </div>
 
-    <input type="radio" class="delivery-method" name="delivery-method" value="DELIVERY" checked/> Delivery <br>
-    <input type="radio" class="delivery-method" name="delivery-method" value="PICKUP"/> Pickup <br>
-    <input type="button" class="order-btn" value="Order"/>
-    <input type="button" class="back-cart-btn" value="Back to cart"/>
+    <h4>Delivering method</h4>
+    <div class="radio">
+        <label>
+            <input type="radio" class="delivery-method" name="delivery-method" value="DELIVERY" checked/>
+            Delivery to the account address
+        </label>
+    </div>
+    <div class="radio">
+        <label>
+            <input type="radio" class="delivery-method" name="delivery-method" value="PICKUP"/>
+            Pick up from the shop
+        </label>
+    </div>
+    <input type="button" class="order-btn btn btn-default" value="Order"/>
+    <input type="button" class="back-cart-btn btn btn-default" value="Back to cart"/>
 </div>
 
 <jsp:include page="/WEB-INF/parts/footer.jsp"></jsp:include>

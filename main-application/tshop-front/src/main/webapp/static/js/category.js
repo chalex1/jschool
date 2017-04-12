@@ -11,18 +11,17 @@
     var createCategoriesList = function (categories) {
 
         var detailedUrl = ctx + "/categorydetailed?id=";
+        var $table = jQuery("<table class='table '></table>");
+        $table.append(jQuery("<tr><td>Category name</td><td></td><td></td></tr>"));
         for (var i = 0; i < categories.length; i++) {
-            var row = jQuery("<div></div>");
-            var strhtml = [];
-            strhtml.push(
-                "<a href='",
+            var row = jQuery("<tr></tr>");
+
+            var rbody = jQuery(["<td><a href='",
                 detailedUrl,
                 categories[i].id,
-                "'>", categories[i].name, "</a>"
-            );
-            var rbody = jQuery(strhtml.join(""));
+                "'>", categories[i].name, "</a></td>"].join(""));
             row.append(rbody);
-            var rdeletebtn = jQuery("<input type=button value='Delete'/>")
+            var rdeletebtn = jQuery("<input type='button' class='btn btn-default' value='Delete'/>")
             rdeletebtn.click(i,function (e) {
                  jQuery.ajax({
                     url: ctx + "/data/categories?id=" + categories[e.data].id,
@@ -35,9 +34,10 @@
                     }
                 });
             });
-            row.append(rdeletebtn);
-            jQuery(".categories").append(row);
+            row.append(jQuery("<td></td>").append(rdeletebtn));
+            $table.append(row);
         }
+        jQuery(".categories").append($table);
     };
 
     jQuery.ajax({
@@ -45,7 +45,7 @@
         success: function (data) {
             createCategoriesList(data);
         },
-        failure: function (error) {
+        error: function (error) {
             errorMessageDiv.text("Problem with getting categories");
         }
     });

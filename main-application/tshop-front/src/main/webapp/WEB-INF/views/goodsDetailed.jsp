@@ -14,21 +14,20 @@
 <jsp:include page="/WEB-INF/parts/menu.jsp"></jsp:include>
 
 <input class="hidden goods-id" value="${id}"/>
-<div>
+
+<div class="container">
     <input type="text" class="goods-name"/> Name<br>
     <input type="number" min="0" class="goods-price"/> Price <br>
-    <input type ="text" class="goods-brand"/> Brand <br>
+    <input type="text" class="goods-brand"/> Brand <br>
     <input type="text" class="goods-colour"/> Colour <br>
     <input type="text" class="goods-info"/> Info <br>
     <input type="number" min="0" class="goods-weight"/> Weight<br>
     <input type="number" min="0" class="goods-volume"/> Volume<br>
     <input type="number" min="0" class="goods-quantity"/> Quantity<br>
     <div class="goods-categories">
-
     </div>
 
 </div>
-
 
 
 <jsp:include page="/WEB-INF/parts/footer.jsp"></jsp:include>

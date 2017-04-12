@@ -12,9 +12,13 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/parts/menu.jsp"></jsp:include>
-
-<input type="button" value="Добавить" class="addNewCategoryBtn";/>
-<div class="categories"></div>
+<div class="container">
+    <div class="col-sm-12 col-lg-6">
+        <h3>Categories</h3>
+        <input type="button" value="Add" class="addNewCategoryBtn btn btn-default"/>
+        <div class="categories "></div>
+    </div>
+</div>
 
 <jsp:include page="/WEB-INF/parts/footer.jsp"></jsp:include>
 <script src="static/js/category.js"></script>

@@ -13,11 +13,16 @@
 <body>
 <jsp:include page="/WEB-INF/parts/menu.jsp"></jsp:include>
 
+<div class="container">
+    <div class="col-sm-12 col-lg-6">
+        <div class="cart">
+        </div>
 
-<div class="cart">
-
+        <input type="button" class="order-btn btn btn-default" value="Make an order"/>
+        <input type="button" class="cancel-save-btn btn btn-default" value="Return"/>
+    </div>
 </div>
-<input type="button" class="order-btn" value="Make an order"/>
+
 
 <jsp:include page="/WEB-INF/parts/footer.jsp"></jsp:include>
 <script src="static/js/cart.js"></script>

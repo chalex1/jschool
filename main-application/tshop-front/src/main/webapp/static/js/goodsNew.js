@@ -7,7 +7,7 @@
     var $categorySelectDiv = jQuery(".goods-categories");
 
     var createCategorySelect = function (categories) {
-        var $select = jQuery("<select class='goods-categories-select'></select>").attr("multiple", true);
+        var $select = jQuery("<select class='goods-categories-select form-control'></select>").attr("multiple", true);
         for (var i = 0; i < categories.length; i++) {
             $select.append(jQuery("<option value='" + categories[i].id + "'></option>").text(categories[i].name));
         }
@@ -20,10 +20,14 @@
         success: function (data) {
             createCategorySelect(data);
         },
-        failure: function (error) {
+        error: function (error) {
             $errorMessageSpan.text("Problem with getting categories");
         }
     });
+
+    jQuery(".goods-rtrn-btn").click(function () {
+        window.location.href = ctx+"/goods";
+    })
 
     jQuery(".goods-save-btn").click(function () {
         var goods = {};
@@ -49,7 +53,7 @@
             success: function () {
                 window.location.href=ctx+"/goods";
             },
-            failure: function () {
+            error: function () {
                 $errorMessageSpan.text("Problem with adding goods");
             }
         });

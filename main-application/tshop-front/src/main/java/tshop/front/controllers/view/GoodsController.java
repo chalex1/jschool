@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Controller
 public class GoodsController {
 
-    @RequestMapping( path="/goods", method= RequestMethod.GET)
+    @RequestMapping( path={"/goods","/"}, method= RequestMethod.GET)
     public String home() {
         return "goods";
     }

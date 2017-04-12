@@ -26,38 +26,41 @@ public class ClientService {
     private AccountRepository accountRepository;
     private AddressRepository addressRepository;
 
+    @Autowired
     public ClientService(ClientRepository clientRepository, AccountRepository accountRepository, AddressRepository addressRepository) {
         this.clientRepository = clientRepository;
         this.accountRepository = accountRepository;
         this.addressRepository = addressRepository;
     }
 
-    @Autowired
 
-
-    @Transactional
-    public List<ClientTransport> getAllClients(){
-        return clientRepository.findAll().stream().map(client -> {
-            ClientTransport transport = new ClientTransport();
-            transport.setId(client.getId());
-            transport.setAccountTransport(new AccountTransport(client.getAccount()));
-            transport.setAddressTransport(new AddressTransport(client.getAddress()));
-            return transport;
-        }).collect(Collectors.toList());
+    public ClientTransport findClient(Long id) {
+        return getClientTransport(clientRepository.findOne(id));
     }
 
     @Transactional
-    public ClientTransport createClient(long idAddress, long idAccount){
-       Address address =  addressRepository.findOne(idAddress);
-       Account account = accountRepository.findOne(idAccount);
-        Client client =  new Client();
+    public List<ClientTransport> getAllClients() {
+        return clientRepository.findAll().stream().map(client -> {
+            return getClientTransport(client);
+        }).collect(Collectors.toList());
+    }
+
+    private ClientTransport getClientTransport(Client client) {
+        ClientTransport transport = new ClientTransport();
+        transport.setId(client.getId());
+        transport.setAccountTransport(new AccountTransport(client.getAccount()));
+        transport.setAddressTransport(new AddressTransport(client.getAddress()));
+        return transport;
+    }
+
+    @Transactional
+    public ClientTransport createClient(long idAddress, long idAccount) {
+        Address address = addressRepository.findOne(idAddress);
+        Account account = accountRepository.findOne(idAccount);
+        Client client = new Client();
         client.setAccount(account);
         client.setAddress(address);
         clientRepository.save(client);
-        ClientTransport newclientTransport = new ClientTransport();
-        newclientTransport.setId(client.getId());
-        newclientTransport.setAccountTransport(new AccountTransport(account));
-        newclientTransport.setAddressTransport(new AddressTransport(address));
-        return newclientTransport;
+        return getClientTransport(client);
     }
 }

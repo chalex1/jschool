@@ -9,7 +9,7 @@
     jQuery.ajax({
         url: ctx + "/data/orders",
         success: function (data) {
-            var $table = jQuery("<table></table>");
+            var $table = jQuery("<table class='table table-striped'></table>");
             $table.append("<tr><td>Client id</td><td>Order Status</td><td>Payment Status</td><td>Payment method</td></tr>")
             if (data.length) {
                 for (var i = 0; i < data.length; i++) {
@@ -27,7 +27,7 @@
                 $ordersList.append("No orders for show");
             }
         },
-        failure: function () {
+        error: function () {
             $errorMessageSpan.text("Problem with getting orders");
         }
     })

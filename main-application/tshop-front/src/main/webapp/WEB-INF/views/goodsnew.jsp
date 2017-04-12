@@ -13,19 +13,51 @@
 <body>
 <jsp:include page="/WEB-INF/parts/menu.jsp"></jsp:include>
 
-<div>
-    <input type="text" class="goods-name"/> Name<br>
-    <input type="number" min="0" class="goods-price"/> Price <br>
-    <input type ="text" class="goods-brand"/> Brand <br>
-    <input type="text" class="goods-colour"/> Colour <br>
-    <input type="text" class="goods-info"/> Info <br>
-    <input type="number" min="0" class="goods-weight"/> Weight<br>
-    <input type="number" min="0" class="goods-volume"/> Volume<br>
-    <input type="number" min="0" class="goods-quantity"/> Quantity<br>
-    <div class="goods-categories">
+<div class="container">
 
+    <div class="col-sm-12 col-lg-6">
+        <div class="form-group">
+            <label>Name</label>
+            <input type="text" class="goods-name form-control"/>
+        </div>
+        <div class="form-group">
+            <label>Price</label>
+            <input type="number" min="0" class="goods-price form-control"/>
+        </div>
+        <div class="form-group">
+            <label>Brand</label>
+            <input type="text" class="goods-brand form-control"/>
+        </div>
+        <div class="form-group">
+            <label>Color</label>
+            <input Colourtype="text" class="goods-colour form-control"/>
+        </div>
+        <div class="form-group">
+            <label>Info</label>
+            <input type="text" class="goods-info form-control"/>
+        </div>
+        <div class="form-group">
+            <label>Weight</label>
+            <input type="number" min="0" class="goods-weight form-control"/>
+        </div>
+        <div class="form-group">
+            <label>Volume</label>
+            <input type="number" min="0" class="goods-volume form-control"/>
+        </div>
+        <div class="form-group">
+            <label>Quantity</label>
+            <input type="number" min="0" class="goods-quantity form-control"/>
+        </div>
+        <div class="form-group">
+            <label>Categories</label>
+            <div class="goods-categories">
+
+            </div>
+        </div>
+
+        <input type="button" class="goods-save-btn btn btn-default" value="Save"/>
+        <input type="button" class="goods-rtrn-btn btn btn-default" value="Cancel"/>
     </div>
-    <input type="button" class="goods-save-btn" value ="Save"/>
 </div>
 
 <jsp:include page="/WEB-INF/parts/footer.jsp"></jsp:include>

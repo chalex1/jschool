@@ -50,7 +50,7 @@ public class CartDataController {
             HashMap<Long, Integer> cart = (HashMap<Long, Integer>) session.getAttribute(CLIENTS_CART);
             for (Long id : cart.keySet()) {
                 GoodsTransport gt = goodsService.getOne(id);
-                if (gt != null&&cart.get(id)>0) {
+                if (gt != null && cart.get(id) > 0) {
                     CartTransport cartTransport = new CartTransport();
                     cartTransport.setGoodsTransport(gt);
                     cartTransport.setQuantity(1);//cart.get(id)
@@ -61,10 +61,11 @@ public class CartDataController {
         return cartTransportList;
 
     }
-@RequestMapping(path="data/cart", method = RequestMethod.DELETE)
-public void makeCartEmpty(HttpSession session){
-    session.setAttribute(CLIENTS_CART, new HashMap<Long, Integer>());
-}
+
+    @RequestMapping(path = "data/cart", method = RequestMethod.DELETE)
+    public void makeCartEmpty(HttpSession session) {
+        session.setAttribute(CLIENTS_CART, new HashMap<Long, Integer>());
+    }
 
     //init the cart
 
@@ -76,8 +77,10 @@ public void makeCartEmpty(HttpSession session){
 
     private void changeCart(HttpSession session, Long id, Integer quantity) {
         HashMap<Long, Integer> map = ((HashMap<Long, Integer>) session.getAttribute(CLIENTS_CART));
-        if (map.containsKey(id)) {
-            map.put(id, map.get(id) + quantity);
-        } else if (quantity > 0) map.put(id, quantity);
+        if (quantity < 0) {
+            map.remove(id);
+        } else {
+            map.put(id, 1);
+        }
     }
 }

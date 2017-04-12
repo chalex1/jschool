@@ -13,7 +13,9 @@
 <body>
 <jsp:include page="/WEB-INF/parts/menu.jsp"></jsp:include>
 
-<div class="orders-list"></div>
+<div class="container">
+    <div class="orders-list"></div>
+</div>
 
 <jsp:include page="/WEB-INF/parts/footer.jsp"></jsp:include>
 <script src="static/js/orders.js"></script>

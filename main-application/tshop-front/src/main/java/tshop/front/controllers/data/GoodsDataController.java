@@ -40,7 +40,7 @@ public class GoodsDataController {
         } else if (priceFrom == null && priceTo == null) {
             goodsList = goodsService.getGoodsPage(name, quantityFrom, page, size);
         } else {
-            goodsList = goodsService.getGoodsPage(name, quantityFrom, page, size);
+            goodsList = goodsService.getGoodsPage(name, priceFrom, priceTo, quantityFrom, page, size);
         }
         return goodsList;
     }

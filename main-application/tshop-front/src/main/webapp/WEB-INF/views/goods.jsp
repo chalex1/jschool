@@ -13,16 +13,36 @@
 <body>
 <jsp:include page="/WEB-INF/parts/menu.jsp"></jsp:include>
 
-<div>
-    Название <input type="text" class="filter-goods-name"/>
-    Цена от <input type="text" class="filter-goods-price-from"/>
-    Цена до <input type="text" class="filter-goods-price-to"/>
-    Показывать пустые <input type="checkbox" class="filler-goods-show-empty"/>
-    <input type="button" class="find-goods-btn" value="Find"/>
-</div>
+<div class="container">
 
-<input type="button" value="Add" class="add-new-goods-btn"/>
-<div class="goods"></div>
+    <input type="button" value="Add Bike" class="add-new-goods-btn btn btn-default"/>
+    <br>
+    <br>
+    <br>
+    <div class="form-inline">
+        <div class="form-group">
+            <label class="sr-only" for="filterGoodsName">Model</label>
+            <input type="text" id="filterGoodsName" class="filter-goods-name form-control" placeholder="Model"/>
+        </div>
+        <div class="form-group">
+            <label class="sr-only" for="filterGoodsPriceFrom">Price from</label>
+            <input type="number" class="filter-goods-price-from form-control" id="filterGoodsPriceFrom"
+                   placeholder="Price from"/>
+        </div>
+        <div class="form-group">
+            <input type="number" class="filter-goods-price-to form-control" placeholder="Price to"/>
+        </div>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" class="filler-goods-show-empty"/> In stock
+            </label>
+        </div>
+        <input type="button" class="find-goods-btn btn btn-default" value="Find"/>
+    </div>
+    <br>
+
+    <div class="goods"></div>
+</div>
 
 <jsp:include page="/WEB-INF/parts/footer.jsp"></jsp:include>
 <script src="static/js/goods.js"></script>

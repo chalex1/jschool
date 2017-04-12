@@ -13,10 +13,14 @@
         success: function (data) {
             $categoryName.val(data.name);
         },
-        failure: function () {
+        error: function () {
             errorMessageDiv.text("Category can't be edited");
         }
     });
+
+    jQuery(".cancel-save-btn").click(function () {
+        window.location.href = ctx+"/categories";
+    })
 
     jQuery(".save-category-btn").click(function () {
         var categoryNameVal = $categoryName.val();
@@ -37,7 +41,7 @@
                 success: function (data) {
                     window.location.href = ctx + "/categories";
                 },
-                failure: function (error) {
+                error: function (error) {
                     errorMessageDiv.text("Problem with saving category");
                 }
             });

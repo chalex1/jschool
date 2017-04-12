@@ -2,6 +2,7 @@ package tshop.front.controllers.data;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,6 +30,11 @@ public class ClientDataController {
     @RequestMapping(method = RequestMethod.GET, produces = "application/json")
     public List<ClientTransport> getClients() {
         return clientService.getAllClients();
+    }
+
+    @RequestMapping(path="/{id}",method = RequestMethod.GET, produces = "application/json")
+    public ClientTransport getClient(@PathVariable(value = "id") Long id) {
+        return clientService.findClient(id);
     }
 
     @RequestMapping(method = RequestMethod.POST, produces = "application/json")

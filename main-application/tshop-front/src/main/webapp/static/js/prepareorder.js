@@ -15,7 +15,7 @@
                 goodsIds[i] = data.goodsTransport.id;
             }
         },
-        failure: function () {
+        error: function () {
             $errorMessageSpan.text("Problem with getting cart");
         }
     });
@@ -54,7 +54,7 @@
                 //or should i do it in the service
                 window.location.href = ctx + "/goods";
             },
-            failure: function () {
+            error: function () {
                 $errorMessageSpan.text("Problem with ordering");
             }
         })
