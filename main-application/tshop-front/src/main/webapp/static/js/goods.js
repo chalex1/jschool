@@ -11,7 +11,7 @@
         jQuery(".goods").empty();
         var detailedUrl = ctx+"/goodsdetailed?id=";
         var $table = jQuery("<table class='table table-striped'></table>");
-        $table.append(jQuery("<tr><td>Model</td><td>Brand</td><td>Color</td><td>In store</td><td>Price</td><td></td><td></td></tr>"));
+        $table.append(jQuery("<tr><td>Model</td><td>Brand</td><td>Color</td><td>In store</td><td>Price</td><td></td></tr>"));//<td></td>
         for (var i = 0; i < goods.length; i++) {
             var row = jQuery("<tr></tr>");
 
@@ -38,7 +38,7 @@
                     }
                 });
             });
-            row.append(jQuery("<td></td>").append(rdeletebtn));
+            // row.append(jQuery("<td></td>").append(rdeletebtn));
             var raddbtn = jQuery("<input type='button' class='btn btn-default' value = 'Add To Cart'/>")
 
             if(goods[i].quantity>0){

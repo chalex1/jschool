@@ -4,7 +4,7 @@
 
 (function () {
 
-    var errorMessageDiv = jQuery("#errorMessage");
+    var errorMessageSpan = jQuery("#errorMessage");
     var $categorySelectDiv = jQuery(".goods-categories");
 
     var $goodsId = jQuery(".goods-id");
@@ -32,6 +32,7 @@
                 jQuery(".goods-weight").val(goods.weight);
                 jQuery(".goods-volume").val(goods.volume);
                 jQuery(".goods-quantity").val(goods.quantity);
+                jQuery(".goods-categories select").val(goods.categories);
             }
         });
     }
@@ -53,6 +54,7 @@
 
     jQuery(".goods-save-btn").click(function () {
         var goods = {};
+        goods.id= goodsIdVal;
         goods.name = jQuery(".goods-name").val();
         goods.price = jQuery(".goods-price").val();
         goods.parameter1 = jQuery(".goods-brand").val();
@@ -76,7 +78,7 @@
                 window.location.href = ctx + "/goods";
             },
             error: function () {
-                $errorMessageSpan.text("Problem with adding goods");
+                $errorMessageSpan.text("Problem with saving goods");
             }
         });
 

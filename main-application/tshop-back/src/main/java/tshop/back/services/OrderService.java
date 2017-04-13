@@ -1,5 +1,7 @@
 package tshop.back.services;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,6 +25,8 @@ public class OrderService {
     ClientRepository clientRepository;
     GoodsRepository goodsRepository;
 
+    Logger logger = LoggerFactory.getLogger(OrderService.class.getName());
+
     @Autowired
     public OrderService(OrdersRepository ordersRepository, ClientRepository clientRepository, GoodsRepository goodsRepository) {
         this.ordersRepository = ordersRepository;
@@ -31,6 +35,7 @@ public class OrderService {
     }
 
     public List<OrderTransport> getAllOrders(){
+        logger.info("Orders view");
         return ordersRepository.findAll().stream().map(order -> {
           return orderToOrderTransport(order);
         }).collect(Collectors.toList());
@@ -46,6 +51,8 @@ public class OrderService {
         order.setGoods(goodsRepository.findAll(transport.getGoodsIds()));
         order.setCreated_at(Instant.now());
         ordersRepository.save(order);
+
+        logger.info("Order 's created", order);
         return orderToOrderTransport(ordersRepository.findOne(order.getId()));
     }
 

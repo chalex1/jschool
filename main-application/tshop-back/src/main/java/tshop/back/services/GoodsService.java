@@ -75,6 +75,7 @@ public class GoodsService {
 
 
     public GoodsTransport saveGoods(GoodsTransport transport) {
+
         Goods goods = new Goods();
         if(transport.getId()!=0){
             goods.setId(transport.getId());
@@ -90,6 +91,8 @@ public class GoodsService {
         goods.setDeleted(transport.isDeleted() ? 1 : 0);
         goods.setCategoryes(categoryRepository.findAll(transport.getCategories()));
         goodsRepository.save(goods);
+
+        logger.info("Goods 's saved successfuly ", transport);
         return getOne(goods.getId());
     }
 

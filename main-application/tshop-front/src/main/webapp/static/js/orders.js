@@ -11,18 +11,29 @@
         url: ctx + "/data/orders",
         success: function (data) {
             var $table = jQuery("<table class='table table-striped'></table>");
-            $table.append("<tr><td>Client id</td><td>Order Status</td><td>Payment Status</td><td>Payment method</td><td>Created At</td></tr>")
+            $table.append("<tr><td>Client</td><td>Order Status</td><td>Payment Status</td><td>Payment method</td><td>Created At</td><td></td></tr>")
             if (data.length) {
                 for (var i = 0; i < data.length; i++) {
-                            var $row = jQuery(["<tr><td>", data[i].clientId, "</td>",
+                    (function (i) {
+                        jQuery.ajax({
+                            url: ctx + "/data/clients/" + data[i].clientId
+
+                        }).then(function (client) {
+                            var clientlogin = "";
+                            if (client && client.accountTransport.login) {
+                                clientlogin = client.accountTransport.login;
+                            }
+                            var $row = jQuery(["<tr><td>", clientlogin ? clientlogin : data[i].clientId, "</td>",
                                 "<td>", data[i].status, "</td>",
                                 "<td>", data[i].paymentStatus, "</td>",
                                 "<td>", data[i].paymentMethod, "</td>",
                                 "<td>", new Date(data[i].createdAt).toLocaleString(), "</td>",
-                                "</tr>"].join("")).click(data[i].id, function (e) {
-                                window.location.href = [ctx, "/orderdetailed?id=", e.data].join("");
-                            });
+                                "<td>", "<a href='", ctx, "/orderdetailed?id=", data[i].id, "'> detailed </a> </td>",
+                                "</tr>"].join(""));
                             $table.append($row);
+
+                        });
+                    })(i)
                 }
                 $ordersList.append($table);
             } else {
@@ -35,11 +46,13 @@
     });
 
     var createRow = function () {
-        var $row = jQuery(["<tr><td>", data[i].clientId, "</td>",
+        var $row = jQuery(["<tr><td>",
+            data[i].clientId, "</td>",
             "<td>", data[i].status, "</td>",
             "<td>", data[i].paymentStatus, "</td>",
             "<td>", data[i].paymentMethod, "</td>",
             "<td>", new Date(data[i].createdAt).toLocaleString(), "</td>",
+            "<td>", "<a href='", ctx, "/orderdetailed?id=", e.data, "'> detailed </a> </td>",
             "</tr>"].join("")).click(data[i].id, function (e) {
             window.location.href = [ctx, "/orderdetailed?id=", e.data].join("");
         });

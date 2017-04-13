@@ -7,7 +7,6 @@ import tshop.back.entities.Account;
 import tshop.back.repositories.AccountRepository;
 import tshop.back.transports.AccountTransport;
 
-import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
