@@ -45,6 +45,11 @@ public class GoodsDataController {
         return goodsList;
     }
 
+    @RequestMapping(path="/{id}", method = RequestMethod.GET, produces = "application/json")
+    public GoodsTransport getOne(@PathVariable(value = "id") Long id){
+        return goodsService.getOne(id);
+    }
+
     @RequestMapping(method = {RequestMethod.POST, RequestMethod.PUT}, produces = "application/json", consumes = "application/json")
     public GoodsTransport createGoods(@RequestBody GoodsTransport transport) {
         return goodsService.saveGoods(transport);

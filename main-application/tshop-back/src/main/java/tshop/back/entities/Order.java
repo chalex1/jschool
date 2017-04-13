@@ -3,6 +3,7 @@ package tshop.back.entities;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.time.Instant;
 import java.util.List;
 
 /**
@@ -30,6 +31,9 @@ public class Order {
 
     @Column(name="STATUS")
     String status;
+
+    @Column(name = "CREATED_AT")
+    Instant created_at;
 
     @ManyToOne
     @JoinColumn(name = "ID_CLIENT")
@@ -79,6 +83,14 @@ public class Order {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public Instant getCreated_at() {
+        return created_at;
+    }
+
+    public void setCreated_at(Instant created_at) {
+        this.created_at = created_at;
     }
 
     public Client getClient() {

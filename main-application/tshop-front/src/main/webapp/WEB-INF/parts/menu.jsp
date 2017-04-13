@@ -26,7 +26,7 @@
     <div class="container delimiter">
         <div class="navbar-header">
             <img src="static/img/2pedalss.png"/>
-            <a class="navbar-brand" href="#">Pedals</a>
+            <a class="navbar-brand" href="#">Two Pedals</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">

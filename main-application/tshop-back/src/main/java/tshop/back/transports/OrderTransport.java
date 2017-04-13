@@ -21,6 +21,8 @@ public class OrderTransport {
 
     String status = "";
 
+    String createdAt = "";
+
 
     long clientId;
 
@@ -64,6 +66,14 @@ public class OrderTransport {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
     }
 
     public long getClientId() {

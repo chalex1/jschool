@@ -1,5 +1,7 @@
 package tshop.back.services;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -21,6 +23,7 @@ public class GoodsService {
 
     private GoodsRepository goodsRepository;
     private CategoryRepository categoryRepository;
+    Logger logger = LoggerFactory.getLogger(GoodsService.class.getName());
 
 
     @Autowired
@@ -30,6 +33,7 @@ public class GoodsService {
     }
 
     public List<GoodsTransport> getGoodsPage(String name, Long priceFrom, Long priceTo,  Long quantityFrom, Integer page, Integer size) {
+       logger.info("Getting goods");
         return goodsRepository.findPageWithFilter(
                 defaultName(name),
                 defaultPriceFrom(priceFrom),
@@ -43,6 +47,7 @@ public class GoodsService {
     }
 
     public List<GoodsTransport> getGoodsPage(String name,  Long quantityFrom, Integer page, Integer size) {
+        logger.info("Getting goods");
         return goodsRepository.findPageWithFilter(
                 defaultName(name),
                 defaultQuantity(quantityFrom),
@@ -55,6 +60,7 @@ public class GoodsService {
 
 
     public List<GoodsTransport> getAllGoodsPage(int page, int size) {
+        logger.info("Getting all goods");
         return goodsRepository.findPage(
                 new PageRequest(page-1,size)
         ).stream().map(goods -> {

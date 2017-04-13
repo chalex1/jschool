@@ -9,6 +9,7 @@ import tshop.back.repositories.GoodsRepository;
 import tshop.back.repositories.OrdersRepository;
 import tshop.back.transports.OrderTransport;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -43,6 +44,7 @@ public class OrderService {
         order.setStatus(transport.getStatus());
         order.setClient(clientRepository.findOne(transport.getClientId()));
         order.setGoods(goodsRepository.findAll(transport.getGoodsIds()));
+        order.setCreated_at(Instant.now());
         ordersRepository.save(order);
         return orderToOrderTransport(ordersRepository.findOne(order.getId()));
     }
@@ -54,6 +56,7 @@ public class OrderService {
         orderTransport.setPaymentMethod(order.getPaymentMethod());
         orderTransport.setPaymentStatus(order.getPaymentStatus());
         orderTransport.setStatus(order.getStatus());
+        orderTransport.setCreatedAt(order.getCreated_at().toString());
         orderTransport.setClientId(order.getClient().getId());
         orderTransport.setGoodsIds(getIds(order));
         return  orderTransport;
