@@ -51,6 +51,15 @@ public class Account {
     @Column
     String type;
 
+    private final static String ADMIN_TYPE = "ADMIN";
+
+    public boolean isAdmin(){
+        boolean result = false;
+        if(this.type!=null&&this.type.equals(ADMIN_TYPE))
+            result=true;
+        return result;
+    }
+
     public long getId() {
         return id;
     }

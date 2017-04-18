@@ -38,7 +38,9 @@
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="cart">Cart</a></li>
                 <li><a href="client?id=1">User info</a></li>
+                <li><a href="logout">logout</a></li>
             </ul>
+
 
         </div>
 

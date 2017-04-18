@@ -48,16 +48,21 @@ public class AccountService {
     @Transactional
     public AccountTransport createAccount(AccountTransport atr){
         Account account = new Account();
-
+        if(atr.getId()!=0){
+            account.setId(atr.getId());
+        }
         account.setName(atr.getName());
         account.setLogin(atr.getLogin());
         account.setEmail(atr.getEmail());
         account.setSurname(atr.getSurname());
         account.setBirthday(atr.getBirthday());
         account.setPassword(atr.getPassword());
-System.out.println("trying to save1"+account.getId());
+        account.setType(atr.getType());
+
+
         accountRepository.save(account);
-        System.out.println("now id is"+account.getId());
+
+
         return this.getAccount(account.getId());
 
     }

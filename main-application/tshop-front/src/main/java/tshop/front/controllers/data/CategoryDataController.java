@@ -12,7 +12,7 @@ import java.util.List;
  * Created by Роднуля on 02.04.2017.
  */
 
-@Component
+
 @RestController
 @RequestMapping(path = "data/categories")
 public class CategoryDataController {
