@@ -44,6 +44,7 @@ public class UserService implements UserDetailsService {
         }
 
         User userDetails = new User(account.getLogin(),account.getPassword(),userAuthorities);
+
         return userDetails;
     }
 }

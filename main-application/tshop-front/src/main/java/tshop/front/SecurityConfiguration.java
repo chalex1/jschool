@@ -2,6 +2,7 @@ package tshop.front;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -29,17 +30,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userService);//.passwordEncoder(passwordEncoder())
 
     }
-//    @Autowired
-//    public void configureGlobalSecurity(AuthenticationManagerBuilder builder) throws Exception {
-//        builder.inMemoryAuthentication().withUser("Admin").password("Admin").roles("ADMIN");
-//        builder.inMemoryAuthentication().withUser("Client").password("Client").roles("CLIENT");
-//    }
 
     @Override
     protected void configure(HttpSecurity security) throws Exception {
         security.authorizeRequests().antMatchers("/", "/goods","/cart").permitAll()
+                .antMatchers(HttpMethod.GET,"/data/goods").permitAll()
                 .antMatchers("/categories","/newcategory","/categorydetailed").hasAuthority("ADMIN")
-                .antMatchers("/orders","/orderdetailed").hasAuthority("ADMIN")
+//                .antMatchers("/orders","/orderdetailed").hasAuthority("ADMIN")
+                .antMatchers("/data/**").hasAnyAuthority("ADMIN","CLIENT")
                 .and().formLogin().loginPage("/login")
                 .usernameParameter("username").passwordParameter("userpassword")
                 .and().exceptionHandling().accessDeniedPage("/accessDenied")

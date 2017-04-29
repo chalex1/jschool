@@ -32,8 +32,8 @@ public class AccountDataController {
         return accountService.getAllAccounts();
     }
 
-    @RequestMapping(method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
+    @RequestMapping(method = {RequestMethod.POST, RequestMethod.PUT}, produces = "application/json", consumes = "application/json")
     public AccountTransport createAccount(@RequestBody AccountTransport account){
-        return accountService.createAccount(account);
+        return accountService.saveAccount(account);
     }
 }

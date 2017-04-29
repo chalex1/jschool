@@ -1,3 +1,4 @@
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%--
   Created by IntelliJ IDEA.
   User: Роднуля
@@ -6,39 +7,32 @@
   To change this template use File | Settings | File Templates.
 --%>
 
-<%--<nav class="menu navbar">--%>
-<%--<div class="container">--%>
-<%--<ul class="menuclass nav nav-pills">--%>
-<%--<li><a href="/">Home</a></li>--%>
-<%--<li><a href="goods">Goods</a></li>--%>
-<%--<li><a href="orders">Orders</a></li>--%>
-<%--<li><a href="categories">Categories</a></li>--%>
-<%--<li><a href="cart">Cart</a></li>--%>
 
-<%--</ul>--%>
-<%--<ul class="nav nav-pills navbar-right">--%>
-<%--<li><a href="client?id=1">User info</a></li>--%>
-<%--</ul>--%>
-<%--</div>--%>
-<%--</nav>--%>
 <nav class="navbar ">
 
     <div class="container delimiter">
         <div class="navbar-header">
             <img src="static/img/2pedalss.png"/>
-            <a class="navbar-brand" href="#">Two Pedals</a>
+            <a class="navbar-brand" href="#">Without Two Pedals</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li><a href="goods">Bikes</a></li>
-                <li><a href="orders">Orders</a></li>
-                <li><a href="categories">Categories</a></li>
+                <li><a href="goods">MotoBikes</a></li>
+                <sec:authorize access="hasAuthority('ADMIN') or hasAuthority('CLIENT')">
+                    <li><a href="orders">Orders</a></li>
+                </sec:authorize>
+                <sec:authorize access="hasAuthority('ADMIN')">
+                    <li><a href="categories">Categories</a></li>
+                </sec:authorize>
 
             </ul>
             <ul class="nav navbar-nav navbar-right">
+                <li>${user}</li>
                 <li><a href="cart">Cart</a></li>
-                <li><a href="client?id=1">User info</a></li>
-                <li><a href="logout">logout</a></li>
+                <sec:authorize access="hasAuthority('ADMIN') or hasAuthority('CLIENT')">
+                    <li><a href="client"><sec:authentication property="principal.username"/></a></li>
+                    <li><a href="logout">logout</a></li>
+                </sec:authorize>
             </ul>
 
 

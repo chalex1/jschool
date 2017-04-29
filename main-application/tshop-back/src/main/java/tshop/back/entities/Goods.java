@@ -10,7 +10,7 @@ import java.util.Set;
  * Created by Роднуля on 28.03.2017.
  */
 @Entity
-@Table(name="ESHOP.GOODS")
+@Table(name = "ESHOP.GOODS")
 public class Goods {
 
 
@@ -19,39 +19,53 @@ public class Goods {
     @GenericGenerator(name = "increment", strategy = "increment")
     @Column
     long id;
-
     @Column
-    String name;
-
+    String model;
     @Column
     long price;
-
     @Column
-    String parameter1;
-
+    String enginetype;
     @Column
-    String parameter2;
-
+    String color;
     @Column
-    String parameter3;
-
+    String transmission;
     @Column
     long weight;
-
     @Column
     long volume;
-
     @Column
     long quantity;
-
     @Column
     long deleted;
+    @Column
+    String brakefront;
+    @Column
+    String brakerear;
+    @Column
+    String suspensionfront;
+    @Column
+    String suspensionrear;
+    @Column
+    String tiresfront;
+    @Column
+    String tiresrear;
+    @Column
+    String dimensions;
+    @Column
+    long seatheight;
+    @Column
+    long wetweight;
+    @Column
+    String warranty;
+    @Column
+    String promodescription;
+
 
     @Column
     @ManyToMany
     @JoinTable(name = "ESHOP.GOODS_CATEGORIES",
-            joinColumns = {@JoinColumn(name = "ID_GOODS") },
-            inverseJoinColumns = { @JoinColumn(name = "ID_CATEGORY") })
+            joinColumns = {@JoinColumn(name = "ID_GOODS")},
+            inverseJoinColumns = {@JoinColumn(name = "ID_CATEGORY")})
     List<Category> categories;
 
     public long getId() {
@@ -62,12 +76,12 @@ public class Goods {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getModel() {
+        return model;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setModel(String model) {
+        this.model = model;
     }
 
     public long getPrice() {
@@ -78,28 +92,28 @@ public class Goods {
         this.price = price;
     }
 
-    public String getParameter1() {
-        return parameter1;
+    public String getEnginetype() {
+        return enginetype;
     }
 
-    public void setParameter1(String parameter1) {
-        this.parameter1 = parameter1;
+    public void setEnginetype(String enginetype) {
+        this.enginetype = enginetype;
     }
 
-    public String getParameter2() {
-        return parameter2;
+    public String getColor() {
+        return color;
     }
 
-    public void setParameter2(String parameter2) {
-        this.parameter2 = parameter2;
+    public void setColor(String color) {
+        this.color = color;
     }
 
-    public String getParameter3() {
-        return parameter3;
+    public String getTransmission() {
+        return transmission;
     }
 
-    public void setParameter3(String parameter3) {
-        this.parameter3 = parameter3;
+    public void setTransmission(String transmission) {
+        this.transmission = transmission;
     }
 
     public long getWeight() {
@@ -126,20 +140,107 @@ public class Goods {
         this.quantity = quantity;
     }
 
-
-    public List<Category> getCategoryes() {
-        return categories;
-    }
-
-    public void setCategoryes(List<Category> categoryes) {
-        this.categories = categoryes;
-    }
-
     public long getDeleted() {
         return deleted;
     }
 
     public void setDeleted(long deleted) {
         this.deleted = deleted;
+    }
+
+    public String getBrakefront() {
+        return brakefront;
+    }
+
+    public void setBrakefront(String brakefront) {
+        this.brakefront = brakefront;
+    }
+
+    public String getBrakerear() {
+        return brakerear;
+    }
+
+    public void setBrakerear(String brakerear) {
+        this.brakerear = brakerear;
+    }
+
+    public String getSuspensionfront() {
+        return suspensionfront;
+    }
+
+    public void setSuspensionfront(String suspensionfront) {
+        this.suspensionfront = suspensionfront;
+    }
+
+    public String getSuspensionrear() {
+        return suspensionrear;
+    }
+
+    public void setSuspensionrear(String suspensionrear) {
+        this.suspensionrear = suspensionrear;
+    }
+
+    public String getTiresfront() {
+        return tiresfront;
+    }
+
+    public void setTiresfront(String tiresfront) {
+        this.tiresfront = tiresfront;
+    }
+
+    public String getTiresrear() {
+        return tiresrear;
+    }
+
+    public void setTiresrear(String tiresrear) {
+        this.tiresrear = tiresrear;
+    }
+
+    public String getDimensions() {
+        return dimensions;
+    }
+
+    public void setDimensions(String dimensions) {
+        this.dimensions = dimensions;
+    }
+
+    public long getSeatheight() {
+        return seatheight;
+    }
+
+    public void setSeatheight(long seatheight) {
+        this.seatheight = seatheight;
+    }
+
+    public long getWetweight() {
+        return wetweight;
+    }
+
+    public void setWetweight(long wetweight) {
+        this.wetweight = wetweight;
+    }
+
+    public String getWarranty() {
+        return warranty;
+    }
+
+    public void setWarranty(String warranty) {
+        this.warranty = warranty;
+    }
+
+    public String getPromodescription() {
+        return promodescription;
+    }
+
+    public void setPromodescription(String promodescription) {
+        this.promodescription = promodescription;
+    }
+
+    public List<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<Category> categories) {
+        this.categories = categories;
     }
 }

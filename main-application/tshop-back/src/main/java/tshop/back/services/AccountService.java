@@ -46,7 +46,7 @@ public class AccountService {
     }
 
     @Transactional
-    public AccountTransport createAccount(AccountTransport atr){
+    public AccountTransport saveAccount(AccountTransport atr){
         Account account = new Account();
         if(atr.getId()!=0){
             account.setId(atr.getId());

@@ -24,11 +24,11 @@
         jQuery.ajax({
             url: ctx + "/data/goods/" + goodsIdVal,
             success: function (goods) {
-                jQuery(".goods-name").val(goods.name);
+                jQuery(".goods-model").val(goods.model);
                 jQuery(".goods-price").val(goods.price);
-                jQuery(".goods-brand").val(goods.parameter1);
-                jQuery(".goods-colour").val(goods.parameter2);
-                jQuery(".goods-info").val(goods.parameter3);
+                jQuery(".goods-enginetype").val(goods.enginetype);
+                jQuery(".goods-colour").val(goods.color);
+                jQuery(".goods-transmission").val(goods.transmission);
                 jQuery(".goods-weight").val(goods.weight);
                 jQuery(".goods-volume").val(goods.volume);
                 jQuery(".goods-quantity").val(goods.quantity);
@@ -55,11 +55,11 @@
     jQuery(".goods-save-btn").click(function () {
         var goods = {};
         goods.id= goodsIdVal;
-        goods.name = jQuery(".goods-name").val();
+        goods.model = jQuery(".goods-model").val();
         goods.price = jQuery(".goods-price").val();
-        goods.parameter1 = jQuery(".goods-brand").val();
-        goods.parameter2 = jQuery(".goods-colour").val();
-        goods.parameter3 = jQuery(".goods-info").val();
+        goods.enginetype = jQuery(".goods-enginetype").val();
+        goods.color = jQuery(".goods-colour").val();
+        goods.transmission = jQuery(".goods-transmission").val();
         goods.weight = jQuery(".goods-weight").val();
         goods.volume = jQuery(".goods-volume").val();
         goods.quantity = jQuery(".goods-quantity").val();

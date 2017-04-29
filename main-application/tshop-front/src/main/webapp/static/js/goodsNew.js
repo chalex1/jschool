@@ -31,11 +31,11 @@
 
     jQuery(".goods-save-btn").click(function () {
         var goods = {};
-        goods.name = jQuery(".goods-name").val();
+        goods.model = jQuery(".goods-model").val();
         goods.price = jQuery(".goods-price").val();
-        goods.parameter1 = jQuery(".goods-brand").val();
-        goods.parameter2 = jQuery(".goods-colour").val();
-        goods.parameter3 = jQuery(".goods-info").val();
+        goods.enginetype = jQuery(".goods-enginetype").val();
+        goods.color = jQuery(".goods-colour").val();
+        goods.transmission = jQuery(".goods-transmission").val();
         goods.weight = jQuery(".goods-weight").val();
         goods.volume = jQuery(".goods-volume").val();
         goods.quantity = jQuery(".goods-quantity").val();

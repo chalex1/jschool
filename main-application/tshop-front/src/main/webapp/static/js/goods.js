@@ -18,9 +18,9 @@
 
             var rbody = jQuery(
                 [
-                    "<td>","<a href='",detailedUrl, goods[i].id,"'>",goods[i].name, "</a>", "</td>",
-                    "<td>",goods[i].parameter1,"</td>",
-                    "<td>",goods[i].parameter2,"</td>",
+                    "<td>","<a href='",detailedUrl, goods[i].id,"'>",goods[i].model, "</a>", "</td>",
+                    "<td>",goods[i].enginetype,"</td>",
+                    "<td>",goods[i].color,"</td>",
                     "<td>",goods[i].quantity,"</td>",
                     "<td>",goods[i].price,"</td>",
                 ].join(""));
@@ -74,7 +74,7 @@
         window.location.href = ctx + "/goodsnew";
     });
     jQuery(".find-goods-btn").click(function () {
-        var name=jQuery(".filter-goods-name").val();
+        var model=jQuery(".filter-goods-name").val();
         var priceFrom= jQuery(".filter-goods-price-from").val();
         var priceTo = jQuery(".filter-goods-price-to").val();
         var instock = jQuery(".filler-goods-show-empty")[0].checked;
@@ -82,7 +82,7 @@
         jQuery.ajax({
             url: ctx + "/data/goods",
            data: {
-                name: name,
+                model: model,
                 priceFrom: priceFrom,
                 priceTo: priceTo,
                quantityFrom: instock?1:0

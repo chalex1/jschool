@@ -27,7 +27,7 @@ public class GoodsDataController {
 
 
     @RequestMapping(method = RequestMethod.GET, produces = "application/json")
-    public List<GoodsTransport> getList(@RequestParam(name = "name", required = false) String name,
+    public List<GoodsTransport> getList(@RequestParam(name = "model", required = false) String model,
                                         @RequestParam(name = "priceFrom", required = false) Long priceFrom,
                                         @RequestParam(name = "priceTo", required = false) Long priceTo,
                                         @RequestParam(name = "quantityFrom", required = false) Long quantityFrom,
@@ -35,12 +35,12 @@ public class GoodsDataController {
                                         @RequestParam(name = "size", defaultValue = "10") int size
     ) {
         List<GoodsTransport> goodsList = new LinkedList<>();
-        if (name == null && priceFrom == null && priceTo == null && quantityFrom == null) {
+        if (model == null && priceFrom == null && priceTo == null && quantityFrom == null) {
             goodsList = goodsService.getAllGoodsPage(page, size);
         } else if (priceFrom == null && priceTo == null) {
-            goodsList = goodsService.getGoodsPage(name, quantityFrom, page, size);
+            goodsList = goodsService.getGoodsPage(model, quantityFrom, page, size);
         } else {
-            goodsList = goodsService.getGoodsPage(name, priceFrom, priceTo, quantityFrom, page, size);
+            goodsList = goodsService.getGoodsPage(model, priceFrom, priceTo, quantityFrom, page, size);
         }
         return goodsList;
     }

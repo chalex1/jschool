@@ -13,8 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class ClientController {
 
     @RequestMapping(path = "/client",method = RequestMethod.GET)
-    public String clientDetailed(Model model, @RequestParam(name="id") Long id){
-        model.addAttribute("id", id);
+    public String clientDetailed(){
         return "clientDetailed";
     }
 }

@@ -10,4 +10,6 @@ import tshop.back.entities.Client;
 @Transactional
 public interface ClientRepository extends JpaRepository<Client, Long> {
 
+
+
 }

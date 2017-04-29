@@ -17,22 +17,22 @@ import java.util.List;
 public interface GoodsRepository extends JpaRepository<Goods, Long> {
 
     @Query("SELECT g FROM Goods AS g " +
-            "WHERE g.name LIKE :name " +
+            "WHERE g.model LIKE :model " +
             "AND g.price>=:priceFrom " +
             "AND g.price <= :priceTo " +
             "AND g.quantity >= :quantityFrom " +
             "AND g.deleted = 0 ")
-    List<Goods> findPageWithFilter(@Param("name") String name,
+    List<Goods> findPageWithFilter(@Param("model") String model,
                                    @Param("priceFrom") Long priceFrom,
                                    @Param("priceTo") Long priceTo,
                                    @Param("quantityFrom") Long quantityFrom,
                                    Pageable pageable);
 
     @Query("SELECT g FROM Goods AS g " +
-            "WHERE g.name LIKE :name " +
+            "WHERE g.model LIKE :model " +
             "AND g.quantity >= :quantityFrom " +
             "AND g.deleted = 0 ")
-    List<Goods> findPageWithFilter(@Param("name") String name,
+    List<Goods> findPageWithFilter(@Param("model") String model,
                                    @Param("quantityFrom") Long quantityFrom,
                                    Pageable pageable);
 

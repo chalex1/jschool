@@ -13,7 +13,7 @@
 <body>
 <jsp:include page="/WEB-INF/parts/menu.jsp"></jsp:include>
 
-<input class="hidden client-id" value="${id}"/>
+<input class="hidden client-id" value="<sec:authentication property="principal.username"/>"/>
 
 <div class="container">
     <div class="col-sm-12 col-lg-6">

@@ -38,6 +38,12 @@ public class ClientService {
         return getClientTransport(clientRepository.findOne(id));
     }
 
+
+
+//    public ClientTransport findClientByLogin(String login){
+//        return getClientTransport(clientRepository.findOne(login));
+//    }
+
     @Transactional
     public List<ClientTransport> getAllClients() {
         return clientRepository.findAll().stream().map(client -> {

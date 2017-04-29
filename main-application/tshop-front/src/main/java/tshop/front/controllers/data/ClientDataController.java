@@ -32,10 +32,10 @@ public class ClientDataController {
         return clientService.getAllClients();
     }
 
-    @RequestMapping(path="/{id}",method = RequestMethod.GET, produces = "application/json")
-    public ClientTransport getClient(@PathVariable(value = "id") Long id) {
-        return clientService.findClient(id);
-    }
+//    @RequestMapping(path="/{id}",method = RequestMethod.GET, produces = "application/json")
+//    public ClientTransport getClient(@PathVariable(value = "id") String id) {
+//        return clientService.findClient(id);
+//    }
 
     @RequestMapping(method = RequestMethod.POST, produces = "application/json")
     public ClientTransport createAddress() {

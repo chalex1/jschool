@@ -17,24 +17,24 @@
 
     <div class="col-sm-12 col-lg-6">
         <div class="form-group">
-            <label>Name</label>
-            <input type="text" class="goods-name form-control"/>
+            <label>Model</label>
+            <input type="text" class="goods-model form-control"/>
         </div>
         <div class="form-group">
             <label>Price</label>
             <input type="number" min="0" class="goods-price form-control"/>
         </div>
         <div class="form-group">
-            <label>Brand</label>
-            <input type="text" class="goods-brand form-control"/>
+            <label>EngineType</label>
+            <input type="text" class="goods-enginetype form-control"/>
         </div>
         <div class="form-group">
             <label>Color</label>
             <input Colourtype="text" class="goods-colour form-control"/>
         </div>
         <div class="form-group">
-            <label>Info</label>
-            <input type="text" class="goods-info form-control"/>
+            <label>Transmission</label>
+            <input type="text" class="goods-transmission form-control"/>
         </div>
         <div class="form-group">
             <label>Weight</label>

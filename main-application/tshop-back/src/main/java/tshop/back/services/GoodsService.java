@@ -80,16 +80,27 @@ public class GoodsService {
         if(transport.getId()!=0){
             goods.setId(transport.getId());
         }
-        goods.setName(transport.getName());
-        goods.setWeight(transport.getWeight());
-        goods.setParameter1(transport.getParameter1());
-        goods.setParameter2(transport.getParameter2());
-        goods.setParameter3(transport.getParameter3());
-        goods.setVolume(transport.getVolume());
+        goods.setModel(transport.getModel());
         goods.setPrice(transport.getPrice());
+        goods.setEnginetype(transport.getEnginetype());
+        goods.setColor(transport.getColor());
+        goods.setWeight(transport.getWeight());       
+        goods.setVolume(transport.getVolume());
         goods.setQuantity(transport.getQuantity());
         goods.setDeleted(transport.isDeleted() ? 1 : 0);
-        goods.setCategoryes(categoryRepository.findAll(transport.getCategories()));
+        goods.setBrakefront(transport.getBrakefront());
+        goods.setBrakerear(transport.getBrakerear());
+        goods.setSuspensionfront(transport.getSuspensionfront());
+        goods.setSuspensionrear(transport.getSuspensionrear());
+        goods.setTiresfront(transport.getTiresfront());
+        goods.setTiresrear(transport.getTiresrear());
+        goods.setDimensions(transport.getDimensions());
+        goods.setSeatheight(transport.getSeatheight());
+        goods.setWeight(transport.getWeight());
+        goods.setWarranty(transport.getWarranty());
+        goods.setPromodescription(transport.getPromodescription());
+        
+        goods.setCategories(categoryRepository.findAll(transport.getCategories()));
         goodsRepository.save(goods);
 
         logger.info("Goods 's saved successfuly ", transport);
@@ -99,21 +110,30 @@ public class GoodsService {
     private GoodsTransport goodsEntityToTransport(Goods goods) {
         GoodsTransport transport = new GoodsTransport();
         transport.setId(goods.getId());
-        transport.setName(goods.getName());
-        transport.setParameter1(goods.getParameter1());
-        transport.setParameter2(goods.getParameter2());
-        transport.setParameter3(goods.getParameter3());
+        transport.setModel(goods.getModel());
         transport.setPrice(goods.getPrice());
-        transport.setQuantity(goods.getQuantity());
-        transport.setVolume(goods.getVolume());
+        transport.setEnginetype(goods.getEnginetype());
+        transport.setColor(goods.getColor());
         transport.setWeight(goods.getWeight());
-        transport.setCategories(getCategoriesIds(goods));
+        transport.setVolume(goods.getVolume());
+        transport.setQuantity(goods.getQuantity());
+        transport.setBrakefront(goods.getBrakefront());
+        transport.setBrakerear(goods.getBrakerear());
+        transport.setSuspensionfront(goods.getSuspensionfront());
+        transport.setSuspensionrear(goods.getSuspensionrear());
+        transport.setTiresfront(goods.getTiresfront());
+        transport.setTiresrear(goods.getTiresrear());
+        transport.setDimensions(goods.getDimensions());
+        transport.setSeatheight(goods.getSeatheight());
+        transport.setWeight(goods.getWeight());
+        transport.setWarranty(goods.getWarranty());
+        transport.setPromodescription(goods.getPromodescription());
         transport.setDeleted(goods.getDeleted() == 1);
         return transport;
     }
 
     private List<Long> getCategoriesIds(Goods goods) {
-        return goods.getCategoryes().stream().map(category -> {
+        return goods.getCategories().stream().map(category -> {
             return category.getId();
         }).collect(Collectors.toList());
     }
