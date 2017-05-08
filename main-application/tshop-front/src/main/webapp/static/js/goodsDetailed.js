@@ -4,12 +4,24 @@
 
 (function () {
 
+
     var errorMessageSpan = jQuery("#errorMessage");
     var $categorySelectDiv = jQuery(".goods-categories");
 
     var $goodsId = jQuery(".goods-id");
 
     var goodsIdVal = $goodsId.val();
+
+    var admin = false;
+    jQuery.ajax({
+        url: ctx + "/data/clients/current",
+        success: function (data) {
+            admin = data.accountTransport.type === "ADMIN";
+            if(admin){
+                jQuery(".goods-save-btn").removeClass("hidden");
+            }
+        }
+    });
 
     var createCategorySelect = function (categories) {
         var $select = jQuery("<select class='goods-categories-select form-control'></select>").attr("multiple", true);

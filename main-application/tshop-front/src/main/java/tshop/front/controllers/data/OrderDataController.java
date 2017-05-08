@@ -1,12 +1,12 @@
 package tshop.front.controllers.data;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import tshop.back.services.OrderService;
+import tshop.back.transports.OrderInfo;
 import tshop.back.transports.OrderTransport;
 
 import java.util.List;
@@ -22,13 +22,20 @@ public class OrderDataController {
     @Autowired
     OrderService orderService;
 
-    @RequestMapping(method = RequestMethod.GET, produces = "application/json")
-    public List<OrderTransport> getOrders(){
+    @RequestMapping(path = "/all",method = RequestMethod.GET, produces = "application/json")
+    public List<OrderInfo> getOrders(){
         return orderService.getAllOrders();
     }
 
+    @RequestMapping(method = RequestMethod.GET, produces = "application/json")
+    public List<OrderInfo> getOrdersForCurrent()
+    {
+        User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return orderService.findAllOrdersOfClient(principal.getUsername());
+    }
+
     @RequestMapping(method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
-    public OrderTransport createOrder(@RequestBody OrderTransport orderTransport){
+    public OrderInfo createOrder(@RequestBody OrderTransport orderTransport){
         return orderService.createOrder(orderTransport);
     }
 }

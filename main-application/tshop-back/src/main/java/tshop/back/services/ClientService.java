@@ -33,11 +33,13 @@ public class ClientService {
         this.addressRepository = addressRepository;
     }
 
-
     public ClientTransport findClient(Long id) {
         return getClientTransport(clientRepository.findOne(id));
     }
 
+    public ClientTransport findClient(String login) {
+        return getClientTransport(clientRepository.getClientByLogin(login));
+    }
 
 
 //    public ClientTransport findClientByLogin(String login){
@@ -68,5 +70,46 @@ public class ClientService {
         client.setAddress(address);
         clientRepository.save(client);
         return getClientTransport(client);
+    }
+
+    @Transactional
+    public ClientTransport saveClient(ClientTransport transport){
+        AccountTransport accountTransport = transport.getAccountTransport();
+        Account account = accountRepository.findOne(accountTransport.getId());
+        if(account==null){
+            account = new Account();
+        }
+        account.setName(accountTransport.getName());
+        account.setType(accountTransport.getType());
+        account.setPassword(accountTransport.getPassword());
+        account.setBirthday(accountTransport.getBirthday());
+        account.setEmail(accountTransport.getEmail());
+        account.setLogin(accountTransport.getLogin());
+        account.setSurname(accountTransport.getSurname());
+//        accountRepository.save(account);
+
+        AddressTransport addressTransport = transport.getAddressTransport();
+        Address address = addressRepository.findOne(addressTransport.getId());
+        if(address==null){
+            address=new Address();
+        }
+        address.setPostcode(addressTransport.getPostcode());
+        address.setStreet(addressTransport.getStreet());
+        address.setFlat(addressTransport.getFlat());
+        address.setCountry(addressTransport.getCountry());
+        address.setCity(addressTransport.getCity());
+        address.setHome(addressTransport.getHome());
+//        addressRepository.save(address);
+
+
+        Client client= clientRepository.findOne(transport.getId());
+        if(client==null){
+            client=new Client();
+        }
+        client.setId(transport.getId());
+        client.setAccount(account);
+        client.setAddress(address);
+        clientRepository.save(client);
+        return getClientTransport(clientRepository.findOne(client.getId()));
     }
 }

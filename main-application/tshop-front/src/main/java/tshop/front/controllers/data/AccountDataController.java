@@ -36,4 +36,5 @@ public class AccountDataController {
     public AccountTransport createAccount(@RequestBody AccountTransport account){
         return accountService.saveAccount(account);
     }
+
 }

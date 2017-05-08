@@ -1,5 +1,7 @@
 package tshop.back.transports;
 
+import tshop.back.entities.Client;
+
 /**
  * Created by Роднуля on 01.04.2017.
  */
@@ -10,6 +12,15 @@ public class ClientTransport {
     AddressTransport addressTransport;
 
     AccountTransport accountTransport;
+
+    public ClientTransport() {
+    }
+
+    public ClientTransport(Client client) {
+        this.id  = client.getId();
+        this.addressTransport = new AddressTransport(client.getAddress());
+        this.accountTransport = new AccountTransport(client.getAccount());
+    }
 
     public long getId() {
         return id;

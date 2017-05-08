@@ -6,6 +6,14 @@
 
     var $errorMessageSpan = jQuery("#errorMessage");
     var goodsIds = [];
+    var account = {};
+    jQuery.ajax({
+        url: ctx + "/data/clients/current",
+        success: function (data) {
+            account = data.accountTransport;
+            makeAnOrdersList();
+        }
+    });
 
 
     jQuery.ajax({
@@ -36,7 +44,7 @@
         order.deliveryMethod = deliveryMethod;
         order.paymentStatus = "NOTPAYED";
         order.status = "INIT";
-        order.clientId = 1;
+        order.clientId = account.id;
 
         jQuery.ajax({
             url: ctx + "/data/orders",

@@ -5,10 +5,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import tshop.back.entities.Client;
 import tshop.back.entities.Order;
 import tshop.back.repositories.ClientRepository;
 import tshop.back.repositories.GoodsRepository;
 import tshop.back.repositories.OrdersRepository;
+import tshop.back.transports.ClientTransport;
+import tshop.back.transports.OrderInfo;
 import tshop.back.transports.OrderTransport;
 
 import java.time.Instant;
@@ -34,14 +37,22 @@ public class OrderService {
         this.goodsRepository = goodsRepository;
     }
 
-    public List<OrderTransport> getAllOrders(){
+    public List<OrderInfo> getAllOrders(){
         logger.info("Orders view");
         return ordersRepository.findAll().stream().map(order -> {
           return orderToOrderTransport(order);
         }).collect(Collectors.toList());
     }
 
-    public OrderTransport createOrder(OrderTransport transport){
+    public List<OrderInfo> findAllOrdersOfClient(String clientlogin){
+        logger.info("Orders view");
+        Client client = clientRepository.getClientByLogin(clientlogin);
+        return ordersRepository.findByClient(client).stream().map(order -> {
+            return orderToOrderTransport(order);
+        }).collect(Collectors.toList());
+    }
+
+    public OrderInfo createOrder(OrderTransport transport){
         Order order = new Order();
         order.setPaymentMethod(transport.getPaymentMethod());
         order.setPaymentStatus(transport.getPaymentStatus());
@@ -56,17 +67,17 @@ public class OrderService {
         return orderToOrderTransport(ordersRepository.findOne(order.getId()));
     }
 
-    private OrderTransport orderToOrderTransport(Order order){
-        OrderTransport orderTransport = new OrderTransport();
-        orderTransport.setId(order.getId());
-        orderTransport.setDeliveryMethod(order.getDeliveryMethod());
-        orderTransport.setPaymentMethod(order.getPaymentMethod());
-        orderTransport.setPaymentStatus(order.getPaymentStatus());
-        orderTransport.setStatus(order.getStatus());
-        orderTransport.setCreatedAt(order.getCreated_at().toString());
-        orderTransport.setClientId(order.getClient().getId());
-        orderTransport.setGoodsIds(getIds(order));
-        return  orderTransport;
+    private OrderInfo orderToOrderTransport(Order order){
+        OrderInfo orderInfo = new OrderInfo();
+
+        orderInfo.setDeliveryMethod(order.getDeliveryMethod());
+        orderInfo.setPaymentMethod(order.getPaymentMethod());
+        orderInfo.setPaymentStatus(order.getPaymentStatus());
+        orderInfo.setStatus(order.getStatus());
+        orderInfo.setCreatedAt(order.getCreated_at().toString());
+        orderInfo.setClient(new ClientTransport(order.getClient()));
+//        orderInfo.setGoodsIds(getIds(order));
+        return  orderInfo;
     }
 
     private List<Long> getIds(Order order){

@@ -3,10 +3,9 @@
  */
 (function () {
     var $errorMessageSpan = jQuery("#errorMessage");
-    var clienId = jQuery(".client-id").val();
 
     jQuery.ajax({
-        url: [ctx, "/data/clients/", clienId].join(""),
+        url: [ctx, "/data/clients/current"].join(""),
         success: function (data) {
 
             jQuery(".account-name").val(data.accountTransport.name);

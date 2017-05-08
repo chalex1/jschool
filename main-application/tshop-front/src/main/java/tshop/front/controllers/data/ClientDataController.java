@@ -1,11 +1,12 @@
 package tshop.front.controllers.data;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import tshop.back.exceptions.LoginAlreadyInUse;
+import tshop.back.services.AccountService;
 import tshop.back.services.ClientService;
 import tshop.back.transports.ClientTransport;
 
@@ -21,10 +22,12 @@ public class ClientDataController {
 
 
     private ClientService clientService;
+    private AccountService accountService;
 
     @Autowired
-    public ClientDataController(ClientService clientService) {
+    public ClientDataController(ClientService clientService, AccountService accountService) {
         this.clientService = clientService;
+        this.accountService = accountService;
     }
 
     @RequestMapping(method = RequestMethod.GET, produces = "application/json")
@@ -32,13 +35,23 @@ public class ClientDataController {
         return clientService.getAllClients();
     }
 
-//    @RequestMapping(path="/{id}",method = RequestMethod.GET, produces = "application/json")
-//    public ClientTransport getClient(@PathVariable(value = "id") String id) {
-//        return clientService.findClient(id);
-//    }
+    @RequestMapping(path="/current",method = RequestMethod.GET, produces = "application/json")
+    public ClientTransport getClient() {
+        User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-    @RequestMapping(method = RequestMethod.POST, produces = "application/json")
-    public ClientTransport createAddress() {
-        return clientService.createClient(1, 4);
+        return clientService.findClient(principal.getUsername());
+    }
+
+    @RequestMapping(method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
+    public ClientTransport saveNewClient(@RequestBody ClientTransport clientTransport) throws LoginAlreadyInUse {
+        if(accountService.checkOnPossibleLogin(clientTransport.getAccountTransport().getLogin())==false){
+            throw new LoginAlreadyInUse();
+        }
+        return clientService.saveClient(clientTransport);
+    }
+
+    @RequestMapping(method = RequestMethod.PUT, produces = "application/json", consumes = "application/json")
+    public ClientTransport saveClient(@RequestBody ClientTransport clientTransport) {
+        return clientService.saveClient(clientTransport);
     }
 }

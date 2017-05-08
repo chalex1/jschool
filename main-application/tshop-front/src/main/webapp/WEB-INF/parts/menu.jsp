@@ -1,4 +1,5 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Роднуля
@@ -7,7 +8,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 
-
+<sec:authorize var="admin" access="hasAuthority('ADMIN')"></sec:authorize>
+<sec:authorize var="client" access="hasAuthority('CLIENT')"></sec:authorize>
 <nav class="navbar ">
 
     <div class="container delimiter">
@@ -29,9 +31,17 @@
             <ul class="nav navbar-nav navbar-right">
                 <li>${user}</li>
                 <li><a href="cart">Cart</a></li>
+                <c:choose>
+                    <c:when test="${admin||client}">
+                        <li><a href="client"><sec:authentication property="principal.username"/></a></li>
+                        <li><a href="logout">logout</a></li>
+                    </c:when>
+                    <c:otherwise>
+                        <li><a href="login">Account</a></li>
+                    </c:otherwise>
+                </c:choose>
                 <sec:authorize access="hasAuthority('ADMIN') or hasAuthority('CLIENT')">
-                    <li><a href="client"><sec:authentication property="principal.username"/></a></li>
-                    <li><a href="logout">logout</a></li>
+
                 </sec:authorize>
             </ul>
 

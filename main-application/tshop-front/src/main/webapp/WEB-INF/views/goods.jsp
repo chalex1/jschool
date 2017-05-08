@@ -15,7 +15,7 @@
 
 <div class="container">
 
-    <input type="button" value="Add Bike" class="add-new-goods-btn btn btn-default"/>
+    <input type="button" value="Add Motobike" class="add-new-goods-btn btn btn-default hidden"/>
     <br>
     <br>
     <br>

@@ -56,7 +56,7 @@
             </div>
         </div>
 
-        <input type="button" class="goods-save-btn btn btn-default" value="Save"/>
+        <input type="button" class="goods-save-btn btn btn-default hidden" value="Save"/>
         <input type="button" class="goods-rtrn-btn btn btn-default" value="Cancel"/>
     </div>
 

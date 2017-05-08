@@ -72,6 +72,6 @@
 
 
 <jsp:include page="/WEB-INF/parts/footer.jsp"></jsp:include>
-<script src="static/js/clientDetailed.js"></script>
+<script src="static/js/clientNew.js"></script>
 </body>
 </html>

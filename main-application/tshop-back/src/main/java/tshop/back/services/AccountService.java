@@ -25,30 +25,31 @@ public class AccountService {
     }
 
     @Transactional
-    public List<AccountTransport> getAllAccounts(){
-//            List<AccountTransport> res = new LinkedList<AccountTransport>();
-//            res.add(new AccountTransport());
-//            AccountTransport at = new AccountTransport();
-//            at.setEmail("email");
-//            res.add(at);
-//            return res;
+    public List<AccountTransport> getAllAccounts() {
         return accountRepository.findAll().stream().map(account -> {
             AccountTransport transport = new AccountTransport(account);
             return transport;
         }).collect(Collectors.toList());
     }
 
-     AccountTransport getAccount(long id){
-      Account account =accountRepository.findOne(id);
+    AccountTransport getAccount(long id) {
+        Account account = accountRepository.findOne(id);
+        AccountTransport transport = new AccountTransport(account);
+        return transport;
+    }
 
-      AccountTransport transport  = new AccountTransport(account);
-      return transport;
+    public boolean checkOnPossibleLogin(String login) {
+        boolean result = true;
+        Account account = accountRepository.findByLogin(login);
+        if (login == null || login.isEmpty() || account != null)
+            result = false;
+        return result;
     }
 
     @Transactional
-    public AccountTransport saveAccount(AccountTransport atr){
+    public AccountTransport saveAccount(AccountTransport atr) {
         Account account = new Account();
-        if(atr.getId()!=0){
+        if (atr.getId() != 0) {
             account.setId(atr.getId());
         }
         account.setName(atr.getName());

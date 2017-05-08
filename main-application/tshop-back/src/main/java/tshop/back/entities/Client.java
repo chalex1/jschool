@@ -12,14 +12,6 @@ import javax.persistence.*;
 @Table(name = "ESHOP.CLIENTS")
 public class Client {
 
-    /**
-     * CREATE TABLE ESHOP.clients (
-     * id NUMBER PRIMARY KEY,
-     * password VARCHAR2(100),
-     * id_address NUMBER CONSTRAINT id_address_fk REFERENCES ESHOP.addresses (id),
-     * id_account NUMBER CONSTRAINT id_account_fk REFERENCES ESHOP.accounts (id)
-     * );
-     */
     @Id
     @Column
     @GenericGenerator(name = "increment", strategy = "increment")
@@ -27,11 +19,11 @@ public class Client {
     long id;
 
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ID_ACCOUNT")
     Account account;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ID_ADDRESS")
     Address address;
 

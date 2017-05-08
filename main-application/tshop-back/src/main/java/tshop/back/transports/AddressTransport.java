@@ -34,10 +34,10 @@ public class AddressTransport {
         this.id = address.getId();
         this.country = address.getCountry();
         this.city = address.getCity();
-        this.postcode = getPostcode();
-        this.street = getStreet();
-        this.home = getHome();
-        this.flat = getFlat();
+        this.postcode = address.getPostcode();
+        this.street = address.getStreet();
+        this.home = address.getHome();
+        this.flat = address.getFlat();
     }
 
     public long getId() {

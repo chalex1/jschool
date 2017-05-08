@@ -16,4 +16,9 @@ public class ClientController {
     public String clientDetailed(){
         return "clientDetailed";
     }
+
+    @RequestMapping(path = "/clientnew",method = RequestMethod.GET)
+    public String clientNew(){
+        return "clientNew";
+    }
 }
