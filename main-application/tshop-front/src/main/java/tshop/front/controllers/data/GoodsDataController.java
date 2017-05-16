@@ -5,6 +5,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.*;
 import tshop.back.services.GoodsService;
 import tshop.back.transports.GoodsTransport;
+import tshop.front.controllers.message.MessageSender;
 
 
 import java.util.LinkedList;
@@ -19,10 +20,12 @@ import java.util.List;
 public class GoodsDataController {
 
     private GoodsService goodsService;
+    private MessageSender messageSender;
 
     @Autowired
-    public GoodsDataController(GoodsService goodsService) {
+    public GoodsDataController(GoodsService goodsService, MessageSender messageSender) {
         this.goodsService = goodsService;
+        this.messageSender = messageSender;
     }
 
 
@@ -42,6 +45,7 @@ public class GoodsDataController {
         } else {
             goodsList = goodsService.getGoodsPage(model, priceFrom, priceTo, quantityFrom, page, size);
         }
+        messageSender.sendGettingGoods();
         return goodsList;
     }
 
