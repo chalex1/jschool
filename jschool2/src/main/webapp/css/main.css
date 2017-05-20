@@ -1,0 +1,17 @@
+.hidden{
+    display: none;
+}
+
+a.navbar-brand {
+    margin: 50px;
+}
+ul.nav.navbar-nav {
+    margin: 50px;
+}
+.delimiter{
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.table tr{
+    margin-bottom: 10px;
+}

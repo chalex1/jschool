@@ -81,7 +81,7 @@
             createGoodsList(data);
         },
         error: function (error) {
-            errorMessageDiv.text("Problem with getting categories");
+            errorMessageDiv.text("Problem with getting goods");
         }
     });
 
@@ -106,7 +106,7 @@
                 createGoodsList(data);
             },
             error: function (error) {
-                errorMessageDiv.text("Problem with getting categories");
+                errorMessageDiv.text("Problem with getting goods");
             }
         });
     });

@@ -45,7 +45,6 @@ public class GoodsDataController {
         } else {
             goodsList = goodsService.getGoodsPage(model, priceFrom, priceTo, quantityFrom, page, size);
         }
-        messageSender.sendGettingGoods();
         return goodsList;
     }
 
@@ -56,6 +55,16 @@ public class GoodsDataController {
 
     @RequestMapping(method = {RequestMethod.POST, RequestMethod.PUT}, produces = "application/json", consumes = "application/json")
     public GoodsTransport createGoods(@RequestBody GoodsTransport transport) {
+        //sending message via jms on topic tshopnews
+        messageSender.sendMessage("checkit");
         return goodsService.saveGoods(transport);
+    }
+
+
+    //jst for test
+    @RequestMapping(method= RequestMethod.HEAD)
+    public String sendUpdateGoodsToTopic(){
+        messageSender.sendMessage("message sender test");
+        return "nothing";
     }
 }

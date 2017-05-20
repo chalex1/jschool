@@ -4,41 +4,66 @@
 (function () {
 
     var errorMessageDiv = jQuery("#errorMessage");
-
+    var lastUpdated = 0;
 
 
     var createGoodsList = function (goods) {
         jQuery(".goods").empty();
         var detailedUrl = "";
-        var $table = jQuery("<table class='table table-striped'></table>");
-        $table.append(jQuery("<tr><td>Model</td><td>Brand</td><td>Color</td><td>In store</td><td>Price</td><td></td></tr>"));//<td></td>
+        var $div = jQuery("<div class='row'></div>");
+
         for (var i = 0; i < goods.length; i++) {
-            var row = jQuery("<tr></tr>");
+            var $block = jQuery("<div class='col-xs-6 col-lg-4'></div>");
 
 
-            var rbody = jQuery(
+            var $rbody = jQuery(
                 [
-                    "<td>", "<a href='", detailedUrl, goods[i].id, "'>", goods[i].model, "</a>", "</td>",
-                    "<td>", goods[i].enginetype, "</td>",
-                    "<td>", goods[i].color, "</td>",
-                    "<td>", goods[i].quantity, "</td>",
-                    "<td>", goods[i].price, "</td>",
+                    "<br>", "<a href='", detailedUrl, goods[i].id, "'>", goods[i].model, "</a>",
+                    "<br>", goods[i].enginetype,
+                    "<br>", goods[i].color,
+                    "<br>", goods[i].quantity,
+                    "<br>", goods[i].price,
+                    "<input type='button' class='btn btn-default' value='Details'>"
                 ].join(""));
-            row.append(rbody);
+            $block.append($rbody);
 
-            $table.append(row);
-            jQuery(".goods").append($table);
+            $div.append($block);
+            jQuery(".goods").append($div);
         }
     };
 
-    jQuery.ajax({
-        url: "http://localhost:8080/tshop-front-1.0-SNAPSHOT/data/goods",
-        success: function (data) {
-            createGoodsList(data);
-        },
-        error: function (error) {
-            errorMessageDiv.text("Problem with getting categories");
-        }
-    });
 
+    var updateGoods = function () {
+
+        jQuery.ajax({
+            url: "http://localhost:8080/tshop-front-1.0-SNAPSHOT/data/goods",
+            success: function (data) {
+                createGoodsList(data);
+            },
+            error: function (error) {
+                errorMessageDiv.text("Problem with getting goods");
+            }
+        });
+    }
+    var checkUpdateGoods = function () {
+        // alert("checking");
+        jQuery.ajax({
+            url: [ctx, "/app/updated"].join(""),
+            success: function (data) {
+                if (!lastUpdated) {
+                    lastUpdated = data;
+                } else if (data > lastUpdated) {
+                    lastUpdated = data;
+                    updateGoods();
+                    // alert("Updated!");
+                }
+
+            },
+            error: function () {
+
+            }
+        })
+    }
+    updateGoods();
+    setInterval(checkUpdateGoods, 15000);
 })()

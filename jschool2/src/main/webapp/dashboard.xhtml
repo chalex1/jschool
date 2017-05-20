@@ -5,11 +5,31 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-<f:view>
-    <h:outputLabel value="Hello, world"/>
-</f:view>
-<span id="errorMessage" class="bg-info"></span>
-<div class="goods"></div>
-<script src="jquery.js" type="text/javascript"></script>
+<head>
+    <title>Without Pedals</title>
+    <link href="css/bootstrap.css" rel="stylesheet" media="screen" type="text/css"></link>
+    <link href="css/main.css" rel="stylesheet" type="text/css"></link>
+    <script src="jquery.js" type="text/javascript"></script>
+    <script src="bootstrap.js" type="text/javascript"></script>
+</head>
+<body>
+<script type="text/javascript">var ctx = '#{request.contextPath}';</script>
+<!--menu-->
+<nav class="navbar ">
+    <div class="container delimiter">
+        <div class="navbar-header">
+            <img src="img/2pedalss.png"/>
+            <a class="navbar-brand" href="#">Without Pedals</a>
+        </div>
+    </div>
+</nav>
+<!-- -->
+<div class="container"><span id="errorMessage" class="bg-info"></span></div>
+<div class="container">
+    <div class="col-sm-12">
+        <div class="goods"></div>
+    </div>
+</div>
 <script src="goods.js" type="text/javascript"></script>
+</body>
 </html>

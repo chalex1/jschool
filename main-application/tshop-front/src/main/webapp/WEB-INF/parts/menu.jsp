@@ -15,7 +15,7 @@
     <div class="container delimiter">
         <div class="navbar-header">
             <img src="static/img/2pedalss.png"/>
-            <a class="navbar-brand" href="#">Without Two Pedals</a>
+            <a class="navbar-brand" href="#">Without Pedals</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">

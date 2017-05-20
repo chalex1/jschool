@@ -3,7 +3,11 @@ package tshop.front.controllers.message;
 import javax.annotation.Resource;
 import javax.jms.*;
 
+import org.apache.activemq.command.ActiveMQTopic;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jms.core.JmsTemplate;
+import org.springframework.jms.core.MessageCreator;
+import org.springframework.jms.support.destination.JndiDestinationResolver;
 import org.springframework.stereotype.Component;
 
 
@@ -13,16 +17,21 @@ import org.springframework.stereotype.Component;
     @Component
     public class MessageSender {
 
-        @Autowired
 
-        private JMSContext context;
+    @Resource(mappedName = "java:/ConnectionFactory")
+    ConnectionFactory jmsConnectionFactory;
 
-    @Resource(mappedName = "java:/jms/topic/js-topic")
-    private Topic topic;
+    @Autowired
+    JmsTemplate jmsTemplate;
 
-    public void sendGettingGoods() {
-        System.out.println("Sending " + "gettng goods");
-        context.createProducer().send(topic, "Goods was getted");
+    public void sendMessage(String msg) {
+        jmsTemplate.setConnectionFactory(jmsConnectionFactory);
+        this.jmsTemplate.send( new MessageCreator() {
+            public Message createMessage(Session session) throws JMSException {
+                return session.createTextMessage(msg);
+            }
+        });
+
     }
 
     }
