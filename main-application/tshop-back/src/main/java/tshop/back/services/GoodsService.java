@@ -96,7 +96,7 @@ public class GoodsService {
         goods.setTiresrear(transport.getTiresrear());
         goods.setDimensions(transport.getDimensions());
         goods.setSeatheight(transport.getSeatheight());
-        goods.setWeight(transport.getWeight());
+        goods.setTransmission(transport.getTransmission());
         goods.setWarranty(transport.getWarranty());
         goods.setPromodescription(transport.getPromodescription());
         
@@ -125,7 +125,7 @@ public class GoodsService {
         transport.setTiresrear(goods.getTiresrear());
         transport.setDimensions(goods.getDimensions());
         transport.setSeatheight(goods.getSeatheight());
-        transport.setWeight(goods.getWeight());
+        transport.setTransmission(goods.getTransmission());
         transport.setWarranty(goods.getWarranty());
         transport.setPromodescription(goods.getPromodescription());
         transport.setDeleted(goods.getDeleted() == 1);

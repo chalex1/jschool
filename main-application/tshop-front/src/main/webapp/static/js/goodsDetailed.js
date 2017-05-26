@@ -10,6 +10,8 @@
 
     var $goodsId = jQuery(".goods-id");
 
+    var goodsStructure = {};
+
     var goodsIdVal = $goodsId.val();
 
     var admin = false;
@@ -17,9 +19,16 @@
         url: ctx + "/data/clients/current",
         success: function (data) {
             admin = data.accountTransport.type === "ADMIN";
-            if(admin){
+            if (admin) {
                 jQuery(".goods-save-btn").removeClass("hidden");
             }
+        }
+    });
+
+    jQuery.ajax({
+        url: ctx + "/data/goods/structure",
+        success: function (goods) {
+            goodsStructure = goods;
         }
     });
 
@@ -32,28 +41,44 @@
         $categorySelectDiv.append($select);
     }
 
-    var initGoodsForm = function () {
+    // var initGoodsForm = function () {
+    //     jQuery.ajax({
+    //         url: ctx + "/data/goods/" + goodsIdVal,
+    //         success: function (goods) {
+    //             jQuery(".goods-model").val(goods.model);
+    //             jQuery(".goods-price").val(goods.price);
+    //             jQuery(".goods-enginetype").val(goods.enginetype);
+    //             jQuery(".goods-colour").val(goods.color);
+    //             jQuery(".goods-transmission").val(goods.transmission);
+    //             jQuery(".goods-weight").val(goods.weight);
+    //             jQuery(".goods-volume").val(goods.volume);
+    //             jQuery(".goods-quantity").val(goods.quantity);
+    //             jQuery(".goods-categories select").val(goods.categories);
+    //         }
+    //     });
+    // }
+
+    var initGoodsFormRefactored = function () {
         jQuery.ajax({
             url: ctx + "/data/goods/" + goodsIdVal,
             success: function (goods) {
-                jQuery(".goods-model").val(goods.model);
-                jQuery(".goods-price").val(goods.price);
-                jQuery(".goods-enginetype").val(goods.enginetype);
-                jQuery(".goods-colour").val(goods.color);
-                jQuery(".goods-transmission").val(goods.transmission);
-                jQuery(".goods-weight").val(goods.weight);
-                jQuery(".goods-volume").val(goods.volume);
-                jQuery(".goods-quantity").val(goods.quantity);
+                for (var prop in goods) {
+                    var $field = jQuery(".goods-" + prop);
+                    if ($field) {
+                        $field.val(goods[prop]);
+                    }
+                }
                 jQuery(".goods-categories select").val(goods.categories);
             }
         });
-    }
+    };
 
     jQuery.ajax({
         url: ctx + "/data/categories",
         success: function (data) {
             createCategorySelect(data);
-            initGoodsForm();
+            // initGoodsForm();
+            initGoodsFormRefactored();
         },
         error: function (error) {
             $errorMessageSpan.text("Problem with getting categories");
@@ -66,15 +91,21 @@
 
     jQuery(".goods-save-btn").click(function () {
         var goods = {};
-        goods.id= goodsIdVal;
-        goods.model = jQuery(".goods-model").val();
-        goods.price = jQuery(".goods-price").val();
-        goods.enginetype = jQuery(".goods-enginetype").val();
-        goods.color = jQuery(".goods-colour").val();
-        goods.transmission = jQuery(".goods-transmission").val();
-        goods.weight = jQuery(".goods-weight").val();
-        goods.volume = jQuery(".goods-volume").val();
-        goods.quantity = jQuery(".goods-quantity").val();
+        goods.id = goodsIdVal;
+        for(var prop in goodsStructure){
+            var elem = jQuery(".goods-"+prop);
+            if(elem){
+                goods[prop] = elem.val();
+            }
+        };
+        // goods.model = jQuery(".goods-model").val();
+        // goods.price = jQuery(".goods-price").val();
+        // goods.enginetype = jQuery(".goods-enginetype").val();
+        // goods.color = jQuery(".goods-colour").val();
+        // goods.transmission = jQuery(".goods-transmission").val();
+        // goods.weight = jQuery(".goods-weight").val();
+        // goods.volume = jQuery(".goods-volume").val();
+        // goods.quantity = jQuery(".goods-quantity").val();
         goods.categories = [];
         $categorySelectDiv.find("option:selected").each(function (i) {
             goods.categories[i] = jQuery(this).val();

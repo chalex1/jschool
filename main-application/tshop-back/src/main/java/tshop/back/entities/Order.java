@@ -39,6 +39,10 @@ public class Order {
     @JoinColumn(name = "ID_CLIENT")
     Client client;
 
+//    @OneToMany
+//    @JoinColumn(name="ORDER_ID", referencedColumnName="ID")
+//    private List<OrdersGoodsPrice> goodsprices;
+
     @ManyToMany
     @JoinTable(name="ESHOP.ORDERS_GOODS",
             joinColumns = {@JoinColumn(name="ID_ORDER")},

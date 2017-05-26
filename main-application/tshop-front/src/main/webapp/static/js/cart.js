@@ -8,9 +8,7 @@
 
     var $order = jQuery(".order-btn");
 
-    $order.click(function () {
-        window.location.href = ctx + "/neworder";
-    });
+
 
     jQuery(".cancel-save-btn").click(function () {
         window.location.href = ctx + "/goods";
@@ -58,6 +56,76 @@
         error: function () {
             $errorMessageSpan.text("Problem with getting cart");
         }
+    });
+
+
+    //todo add swithch to order cart
+
+    $order.click(function () {
+        // window.location.href = ctx + "/neworder";
+        var goodsIds = [];
+        var account = {};
+        var client = {};
+        jQuery.ajax({
+            url: ctx + "/data/clients/current",
+            success: function (data) {
+                account = data.accountTransport;
+                client = data;
+                jQuery.ajax({
+                    url: ctx + "/data/cart",
+                    success: function (data) {
+                        for (var i = 0; i < data.length; i++) {
+                            goodsIds[i] = data[i].goodsTransport.id;
+                        }
+                        var order = {};
+                        var deliveryMethod = "";
+                        var paymentMethod = "";
+                        order.goodsIds = goodsIds;
+                        order.paymentMethod = paymentMethod;
+                        order.deliveryMethod = deliveryMethod;
+                        order.paymentStatus = "";
+                        order.status = "INIT";
+                        order.clientId = client.id;
+
+                        jQuery.ajax({
+                            url: ctx + "/data/orders",
+                            type: "POST",
+                            data: JSON.stringify(order),
+                            dataType: "json",
+                            contentType: "application/json",
+                            success: function (data) {
+                                //clear the cart
+                                jQuery.ajax({
+                                    url: ctx + "/data/cart",
+                                    type: "DELETE"
+                                })
+                                window.location.href = ctx + "/neworder?id="+data.id;
+                                // window.location.href = ctx + "/goods";
+                            },
+                            error: function (mes) {
+                                if(mes.status ===422){
+
+                                    $errorMessageSpan.text("Sorry,  looks like we re out of this product.");
+                                    //and
+                                    //clear the cart
+                                    jQuery.ajax({
+                                        url: ctx + "/data/cart",
+                                        type: "DELETE"
+                                    })
+                                }else {
+                                    $errorMessageSpan.text(mes.responseText);
+                                }
+                                $errorMessageSpan.text("Problem with ordering");
+                            }
+                        })
+                    },
+                    error: function () {
+                        $errorMessageSpan.text("Problem with getting cart");
+                    }
+                });
+            }
+        });
+
     });
 
 

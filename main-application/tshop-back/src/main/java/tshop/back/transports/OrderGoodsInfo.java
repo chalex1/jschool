@@ -6,7 +6,7 @@ import java.util.Map;
 /**
  * Created by Роднуля on 08.05.2017.
  */
-public class OrderInfo {
+public class OrderGoodsInfo {
 
     Long id = 0L;
 
@@ -25,6 +25,7 @@ public class OrderInfo {
 
     ClientTransport client;
 
+    Map<String, Long> goodsRealPriceMap = new HashMap<>();
 
 
     public Long getId() {
@@ -83,5 +84,11 @@ public class OrderInfo {
         this.client = client;
     }
 
+    public Map<String, Long> getGoodsRealPriceMap() {
+        return goodsRealPriceMap;
+    }
 
+    public void setGoodsRealPriceMap(Map<String, Long> goodsRealPriceMap) {
+        this.goodsRealPriceMap = goodsRealPriceMap;
+    }
 }

@@ -28,4 +28,9 @@ public class GoodsController {
         model.addAttribute("id", id);
         return "goodsDetailed";
     }
+    @RequestMapping(path="/goodsinfo", method = RequestMethod.GET)
+    public String goodsInfo(Model model, @RequestParam(name="id") Long id){
+        model.addAttribute("id", id);
+        return "goodsInfo";
+    }
 }

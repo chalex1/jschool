@@ -48,8 +48,8 @@ public class GoodsDataController {
         return goodsList;
     }
 
-    @RequestMapping(path="/{id}", method = RequestMethod.GET, produces = "application/json")
-    public GoodsTransport getOne(@PathVariable(value = "id") Long id){
+    @RequestMapping(path = "/{id}", method = RequestMethod.GET, produces = "application/json")
+    public GoodsTransport getOne(@PathVariable(value = "id") Long id) {
         return goodsService.getOne(id);
     }
 
@@ -60,11 +60,11 @@ public class GoodsDataController {
         return goodsService.saveGoods(transport);
     }
 
+    GoodsTransport goodsTransport = new GoodsTransport();
 
-    //jst for test
-    @RequestMapping(method= RequestMethod.HEAD)
-    public String sendUpdateGoodsToTopic(){
-        messageSender.sendMessage("message sender test");
-        return "nothing";
+    @RequestMapping(path = "/structure", method = RequestMethod.GET, produces = "application/json")
+    public GoodsTransport getGoodsStructure() {
+        return goodsTransport;
     }
+
 }

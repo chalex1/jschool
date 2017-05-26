@@ -35,16 +35,20 @@ public class ClientDataController {
         return clientService.getAllClients();
     }
 
-    @RequestMapping(path="/current",method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(path = "/current", method = RequestMethod.GET, produces = "application/json")
     public ClientTransport getClient() {
-        User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-        return clientService.findClient(principal.getUsername());
+        ClientTransport result = new ClientTransport();
+        Object canbeuser = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (canbeuser instanceof User) {
+            User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            result = clientService.findClient(principal.getUsername());
+        }
+        return result;
     }
 
     @RequestMapping(method = RequestMethod.POST, produces = "application/json", consumes = "application/json")
     public ClientTransport saveNewClient(@RequestBody ClientTransport clientTransport) throws LoginAlreadyInUse {
-        if(accountService.checkOnPossibleLogin(clientTransport.getAccountTransport().getLogin())==false){
+        if (accountService.checkOnPossibleLogin(clientTransport.getAccountTransport().getLogin()) == false) {
             throw new LoginAlreadyInUse();
         }
         return clientService.saveClient(clientTransport);

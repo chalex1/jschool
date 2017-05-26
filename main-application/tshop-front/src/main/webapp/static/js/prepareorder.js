@@ -1,4 +1,3 @@
-
 /**
  * Created by Роднуля on 11.04.2017.
  */
@@ -7,66 +6,117 @@
     var $errorMessageSpan = jQuery("#errorMessage");
     var goodsIds = [];
     var account = {};
+    var client = {};
+    var order = {};
+    var orderid = jQuery(".order-id").val();
+    var $payButton = jQuery(".pay-by-card");
+
     jQuery.ajax({
         url: ctx + "/data/clients/current",
         success: function (data) {
             account = data.accountTransport;
-            makeAnOrdersList();
+            client = data;
         }
     });
+
+    jQuery(".payment-method").click(function () {
+        if (jQuery(".payment-method:checked").val() === "CARD") {
+            $payButton.removeClass("disabled");
+        }
+        else $payButton.addClass("disabled");
+    })
 
 
     jQuery.ajax({
-        url: ctx + "/data/cart",
+        url: ctx + "/data/orders/" + orderid,
         success: function (data) {
-            for (var i = 0; i < data.length; i++) {
-                goodsIds[i] = data.goodsTransport.id;
-            }
+            order = data;
         },
         error: function () {
-            $errorMessageSpan.text("Problem with getting cart");
+            $errorMessageSpan.text("Problem with getting order detailed");
         }
     });
 
-    jQuery(".back-cart-btn").click(function () {
-        window.location.href=ctx+"/cart";
-    })
+    //discarting order
+    jQuery(".discart-order-btn").click(function () {
+        jQuery.ajax({
+            url: ctx + "/data/orders/" + orderid,
+            type: "DELETE",
+            success: function (data) {
+                window.location.href = ctx + "/goods";
+            },
+            error: function () {
+                $errorMessageSpan.text("Problem discarting order");
+            }
+        });
+    });
 
     jQuery(".order-btn").click(function () {
-        var order = {};
+
 
         var deliveryMethod = jQuery(".delivery-method:checked").val();
         var paymentMethod = jQuery(".payment-method:checked").val();
 
 
-        order.goodsIds = goodsIds;
         order.paymentMethod = paymentMethod;
         order.deliveryMethod = deliveryMethod;
-        order.paymentStatus = "NOTPAYED";
-        order.status = "INIT";
-        order.clientId = account.id;
+        order.paymentStatus = "";
+        if (order.status !== "PAID")
+            order.status = "PROCESS";
+
+        order.clientId = client.id;
 
         jQuery.ajax({
             url: ctx + "/data/orders",
-            type: "POST",
+            type: "PUT",
             data: JSON.stringify(order),
             dataType: "json",
             contentType: "application/json",
             success: function () {
-                //clear the cart
-                jQuery.ajax({
-                    url: ctx + "/data/cart",
-                    type: "DELETE"
-                })
-                //todo change quantity for goods
-                //or should i do it in the service
-                window.location.href = ctx + "/goods";
+                // jQuery.ajax({
+                //     url: ctx+"/orderinfo",
+                //     type: "POST",
+                //     // contentType: 'application/x-www-form-urlencoded',
+                //     // data:JSON.stringify({id: orderid})
+                //     data:orderid
+                // });
+                 window.location.href = ctx + "/orderinfo?id=" + orderid;
             },
-            error: function () {
-                $errorMessageSpan.text("Problem with ordering");
+            error: function (mes) {
+                $errorMessageSpan.text("Problem with saving order");
             }
         })
-    })
+    });
 
+    $payButton.click(function () {
+        //if Ok
+        //
+        // order.status = "PAID";
+        // jQuery.ajax({
+        //     url: ctx + "/data/orders",
+        //     type: "PUT",
+        //     data: JSON.stringify(order),
+        //     dataType: "json",
+        //     contentType: "application/json",
+        //     success: function () {
+        //         window.location.href = ctx + "/orderdetailed?id=" + orderid;
+        //     },
+        //     error: function (mes) {
+        //         $errorMessageSpan.text("Problem with saving order");
+        //     }
+        // });
 
+        ipayCheckout({
+                amount: 500,
+                currency: 'RUB',
+                order_number: order.id,
+                description: 'desc'
+            },
+            function (order) {
+                alert('success')
+            },
+            function (order) {
+                alert('failure')
+            });
+    });
 })()

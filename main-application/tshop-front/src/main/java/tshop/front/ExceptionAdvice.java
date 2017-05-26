@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import tshop.back.exceptions.LoginAlreadyInUse;
+import tshop.back.exceptions.NotEnoughProducts;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -16,12 +17,12 @@ import javax.servlet.http.HttpServletResponse;
 public class ExceptionAdvice {
     Logger logger = LoggerFactory.getLogger(ExceptionAdvice.class.getName());
 
-    @ExceptionHandler(LoginAlreadyInUse.class)
+    @ExceptionHandler({LoginAlreadyInUse.class, NotEnoughProducts.class})
     @ResponseBody
-    public String handleLoginInUse(LoginAlreadyInUse ex, HttpServletResponse response) {
-        logger.info("Login already in use");
+    public String handleUnprocessibleEntity(Exception ex, HttpServletResponse response) {
+        logger.info(ex.getMessage());
         response.setStatus(422);// WebDAV extension 422 Unprocessable Entity
-        return "login already in use";
+        return "Unprocessable Entity. Check the documentation for mor information.";
     }
 
     @ExceptionHandler(Exception.class)

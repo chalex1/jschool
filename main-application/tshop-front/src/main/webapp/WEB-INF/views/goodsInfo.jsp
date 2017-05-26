@@ -2,7 +2,7 @@
   Created by IntelliJ IDEA.
   User: Роднуля
   Date: 11.04.2017
-  Time: 12:07
+  Time: 12:12
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -13,8 +13,9 @@
 <body>
 <jsp:include page="/WEB-INF/parts/menu.jsp"></jsp:include>
 
-<div class="container">
+<input class="hidden goods-id" value="${id}"/>
 
+<div class="container">
     <div class="col-sm-12 col-lg-6">
         <div class="form-group">
             <label>Model</label>
@@ -92,7 +93,6 @@
             <input type=text-area"  class="goods-promodescription form-control"/>
         </div>
 
-
         <div class="form-group">
             <label>Categories</label>
             <div class="goods-categories">
@@ -100,12 +100,14 @@
             </div>
         </div>
 
-        <input type="button" class="goods-save-btn btn btn-default" value="Save"/>
+        <input type="button" class="goods-save-btn btn btn-default hidden" value="Save"/>
         <input type="button" class="goods-rtrn-btn btn btn-default" value="Cancel"/>
     </div>
+
 </div>
 
+
 <jsp:include page="/WEB-INF/parts/footer.jsp"></jsp:include>
-<script src="static/js/goodsNew.js"></script>
+<script src="static/js/goodsInfo.js"></script>
 </body>
 </html>

@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 
-<title>Without Two Pedals</title>
+<title>Without Pedals</title>
 <link href="static/styles/bootstrap.css" rel="stylesheet" media="screen" type="text/css">
 <link href="static/styles/main.css" rel="stylesheet" type="text/css">
 <script src="static/js/jquery.js"></script>

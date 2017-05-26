@@ -14,34 +14,49 @@
 <jsp:include page="/WEB-INF/parts/menu.jsp"></jsp:include>
 
 
-
 <div class="container">
     <input class="hidden order-id" value="${id}"/>
 
 
-    <select class="order-payment-method">
-        <option value="CASH">Cash</option>
-        <option value="CARD">Card</option>
-    </select>
+    <div class="form-group">
+        <label>Categories</label>
+        <select class="order-payment-method">
+            <option value="CASH">Cash</option>
+            <option value="CARD">Card</option>
+        </select>
+    </div>
 
-    <select class="order-delivery-method">
-        <option value="DELIVERY">Delivery</option>
-        <option value="PICKUP">Pickup</option>
-    </select>
+    <div class="form-group">
+        <label>Delivery method</label>
+        <select class="order-delivery-method">
+            <option value="DELIVERY">Delivery</option>
+            <option value="PICKUP">Pickup</option>
+        </select>
+    </div>
 
-    <select class="order-payment-status">
-        <option value="NOTPAYED">Not payed</option>
-        <option value="PAYED">Payed</option>
-    </select>
+    <%--<div class="form-group">--%>
+        <%--<label>Categories</label>--%>
+        <%--<select class="order-payment-status">--%>
+            <%--<option value="NOTPAYED">Not payed</option>--%>
+            <%--<option value="PAYED">Payed</option>--%>
+        <%--</select>--%>
+    <%--</div>--%>
 
 
-    <select class="order-status">
-        <option value="INIT">INIT</option>
-        <option value="ARRANGED">ARRANGED</option>
-        <option value="READY">READY</option>
-    </select>
-    
-    long clientId;
+    <div class="form-group">
+        <label>Status</label>
+        <select class="order-status">
+            <option value="INIT">INIT</option>
+            <option value="PROCESS">PROCESS</option>
+            <option value="PAID">PAID</option>
+            <option value="DISCARDED">DISCARDED</option>
+        </select>
+    </div>
+
+    <input type="button" class="order-save-btn btn btn-default" value="Save"/>
+    <input type="button" class="goods-rtrn-btn btn btn-default" value="Cancel"/>
+
+
 </div>
 
 <jsp:include page="/WEB-INF/parts/footer.jsp"></jsp:include>

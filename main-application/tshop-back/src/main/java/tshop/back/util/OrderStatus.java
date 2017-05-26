@@ -5,8 +5,9 @@ package tshop.back.util;
  */
 public enum OrderStatus {
     INIT("Init"),
-    ARRANGED("Arranged"),
-    READY("Ready");
+    PROCESS("Process"),
+    PAID("Paid"),
+    DISCARDED("Discarded");
     String name;
 
     OrderStatus(String name) {

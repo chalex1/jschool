@@ -21,7 +21,7 @@
         jQuery(".goods").empty();
         var detailedUrl = ctx + "/goodsdetailed?id=";
         var $table = jQuery("<table class='table table-striped'></table>");
-        $table.append(jQuery("<tr><td>Model</td><td>Brand</td><td>Color</td><td>In store</td><td>Price</td><td></td></tr>"));//<td></td>
+        $table.append(jQuery("<tr><td>Model</td><td>Engine type</td><td>Color</td><td>In store</td><td>Price</td><td></td></tr>"));//<td></td>
         for (var i = 0; i < goods.length; i++) {
             var row = jQuery("<tr></tr>");
 
