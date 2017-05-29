@@ -9,9 +9,11 @@
     jQuery.ajax({
         url: ctx + "/data/clients/current",
         success: function (data) {
-            admin = data.accountTransport.type === "ADMIN";
-            if(admin){
-                jQuery(".add-new-goods-btn").removeClass("hidden");
+            if (data && data.accountTransport && data.accountTransport.type) {
+                admin = data.accountTransport.type === "ADMIN";
+                if (admin) {
+                    jQuery(".add-new-goods-btn").removeClass("hidden");
+                }
             }
         }
     })
@@ -51,7 +53,7 @@
             if (admin) {
                 row.append(jQuery("<td></td>").append(rdeletebtn));
             }
-            var raddbtn = jQuery("<input type='button' class='btn btn-default' value = 'Add To Cart'/>")
+            var raddbtn = jQuery("<input type='button' class='btn btn-default' value = 'To Cart'/>")
 
             if (goods[i].quantity > 0) {
                 raddbtn.click(goods[i].id, function (e) {
@@ -88,7 +90,7 @@
     jQuery(".add-new-goods-btn").click(function () {
         window.location.href = ctx + "/goodsnew";
     });
-    jQuery(".find-goods-btn").click(function () {
+    var findGoods = function () {
         var model = jQuery(".filter-goods-name").val();
         var priceFrom = jQuery(".filter-goods-price-from").val();
         var priceTo = jQuery(".filter-goods-price-to").val();
@@ -109,5 +111,8 @@
                 errorMessageDiv.text("Problem with getting goods");
             }
         });
-    });
+        return false;
+    };
+    // jQuery(".find-goods-btn").click(findGoods);
+    jQuery(".search-goods-form").submit(findGoods);
 })()

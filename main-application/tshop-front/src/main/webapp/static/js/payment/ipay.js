@@ -35,13 +35,13 @@
         var orderStr = JSON.stringify(order);
         iframe.id = options.api_token;
 
-        iframe.src = 'https://securepayments.sberbank.ru/payment/docsite/payform-1.html?token=' + options.api_token + '&modal=true&order=' + orderStr + "&language=" + (order.language ? order.language : options.language);
+        iframe.src = 'https://3dsec.sberbank.ru/demopayment/docsite/payform-1.html?token=' + options.api_token + '&modal=true&order=' + orderStr + "&language=" + (order.language ? order.language : options.language);
 
         var modal = new tingle.modal({
             footer: true,
             stickyFooter: false,
             onClose: function() {
-                iframe.contentWindow.postMessage(JSON.stringify({'event':'closeModal'}), 'https://securepayments.sberbank.ru/payment/docsite');
+                iframe.contentWindow.postMessage(JSON.stringify({'event':'closeModal'}), 'https://3dsec.sberbank.ru/demopayment/docsite');
                 setTimeout(function () {
                     window.removeEventListener("message", gotEvent);
                 }, 100);

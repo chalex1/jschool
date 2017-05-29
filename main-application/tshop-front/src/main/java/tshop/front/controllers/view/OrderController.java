@@ -17,10 +17,8 @@ public class OrderController {
     }
 
     @RequestMapping(path="/neworder", method = RequestMethod.GET)
-    public String prepareOrder(Model model, @RequestParam(name = "id") String id)
-    {model.addAttribute("id", id);
-        return "prepareOrder";
-    }
+    public String prepareOrder()
+    {return "prepareOrder";}
 
     @RequestMapping(path="/orderdetailed", method = RequestMethod.GET)
     public String orderDetailed(Model model, @RequestParam(name = "id") Long id) {
@@ -33,6 +31,12 @@ public class OrderController {
     public String orderInfo(Model model, @RequestParam(name = "id") Long id) {
         model.addAttribute("id",id);
         return "orderInfo";
+    }
+
+    @RequestMapping(path="/payment", method = RequestMethod.GET)
+    public String payment(Model model, @RequestParam(name = "id") Long id) {
+        model.addAttribute("id",id);
+        return "payment";
     }
 //
 

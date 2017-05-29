@@ -14,8 +14,8 @@
 
     <div class="container delimiter">
         <div class="navbar-header">
-            <img src="static/img/2pedalss.png"/>
-            <a class="navbar-brand" href="#">Without Pedals</a>
+            <img src="static/img/mb.png"/>
+            <a class="navbar-brand" href="#">Without <br>Pedals</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
@@ -30,7 +30,9 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li>${user}</li>
-                <li><a href="cart">Cart</a></li>
+                <c:if test="${!admin}">
+                    <li><a href="cart">Cart</a></li>
+                </c:if>
                 <c:choose>
                     <c:when test="${admin||client}">
                         <li><a href="client"><sec:authentication property="principal.username"/></a></li>
@@ -40,9 +42,6 @@
                         <li><a href="login">Account</a></li>
                     </c:otherwise>
                 </c:choose>
-                <sec:authorize access="hasAuthority('ADMIN') or hasAuthority('CLIENT')">
-
-                </sec:authorize>
             </ul>
 
 

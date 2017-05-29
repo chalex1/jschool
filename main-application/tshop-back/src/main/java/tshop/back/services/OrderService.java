@@ -3,6 +3,7 @@ package tshop.back.services;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tshop.back.entities.*;
@@ -37,6 +38,7 @@ public class OrderService {
 
     Logger logger = LoggerFactory.getLogger(OrderService.class.getName());
 
+
     @Autowired
     public OrderService(OrdersRepository ordersRepository, ClientRepository clientRepository, GoodsRepository goodsRepository, OrdersGoodsPriceRepository goodsPriceRepository) {
         this.ordersRepository = ordersRepository;
@@ -45,9 +47,14 @@ public class OrderService {
         this.goodsPriceRepository = goodsPriceRepository;
     }
 
+
+    private Sort orderBy() {
+        return new Sort(Sort.Direction.DESC, "createdAt");
+    }
+
     public List<OrderInfo> getAllOrders() {
         logger.info("Orders view");
-        return ordersRepository.findAll().stream().map(order -> {
+        return ordersRepository.findAll(orderBy()).stream().map(order -> {
             return orderToOrderTransport(order);
         }).collect(Collectors.toList());
     }
@@ -55,7 +62,7 @@ public class OrderService {
     public List<OrderInfo> findAllOrdersOfClient(String clientlogin) {
         logger.info("Orders view");
         Client client = clientRepository.getClientByLogin(clientlogin);
-        return ordersRepository.findByClient(client).stream().map(order -> {
+        return ordersRepository.findByClient(client, orderBy()).stream().map(order -> {
             return orderToOrderTransport(order);
         }).collect(Collectors.toList());
     }
@@ -81,7 +88,7 @@ public class OrderService {
         goodsRepository.save(goodsList);
 
         order.setGoods(goodsList);
-        order.setCreated_at(Instant.now());
+        order.setCreatedAt(Instant.now());
         order.setStatus(OrderStatus.PROCESS.toString());
         ordersRepository.save(order);
 
@@ -161,7 +168,7 @@ public class OrderService {
         orderInfo.setPaymentMethod(order.getPaymentMethod());
         orderInfo.setPaymentStatus(order.getPaymentStatus());
         orderInfo.setStatus(order.getStatus());
-        orderInfo.setCreatedAt(order.getCreated_at().toString());
+        orderInfo.setCreatedAt(order.getCreatedAt().toString());
         orderInfo.setClient(new ClientTransport(order.getClient()));
 
         return orderInfo;
@@ -174,7 +181,7 @@ public class OrderService {
         orderInfo.setPaymentMethod(order.getPaymentMethod());
         orderInfo.setPaymentStatus(order.getPaymentStatus());
         orderInfo.setStatus(order.getStatus());
-        orderInfo.setCreatedAt(order.getCreated_at().toString());
+        orderInfo.setCreatedAt(order.getCreatedAt().toString());
         orderInfo.setClient(new ClientTransport(order.getClient()));
 
 

@@ -35,12 +35,14 @@ public class UserService implements UserDetailsService {
         }
 
         Collection<SimpleGrantedAuthority> userAuthorities = new ArrayList<>();
-        SimpleGrantedAuthority clientAuthority = new SimpleGrantedAuthority("CLIENT");
-        userAuthorities.add(clientAuthority);
+
 
         if (account.isAdmin()) {
             SimpleGrantedAuthority employeeAuthority = new SimpleGrantedAuthority("ADMIN");
             userAuthorities.add(employeeAuthority);
+        }else{
+            SimpleGrantedAuthority clientAuthority = new SimpleGrantedAuthority("CLIENT");
+            userAuthorities.add(clientAuthority);
         }
 
         User userDetails = new User(account.getLogin(),account.getPassword(),userAuthorities);

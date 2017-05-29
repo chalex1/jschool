@@ -21,6 +21,10 @@
         jQuery.ajax({
             url: ordersUrl,
             success: function (data) {
+                var infoPage= "/orderinfo?id=";
+                if(admin){
+                    infoPage = "/orderdetailed?id=";
+                }
                 var $table = jQuery("<table class='table table-striped'></table>");
                 $table.append("<tr><td>Client</td><td>Order Status</td><td>Payment Status</td><td>Payment method</td><td>Created At</td><td></td></tr>")
                 if (data.length) {
@@ -31,7 +35,7 @@
                             "<td>", data[i].paymentStatus, "</td>",
                             "<td>", data[i].paymentMethod, "</td>",
                             "<td>", new Date(data[i].createdAt).toLocaleString(), "</td>",
-                            "<td>", "<a href='", ctx, "/orderdetailed?id=", data[i].id, "'> detailed </a> </td>",
+                            "<td>", "<a href='", ctx, infoPage, data[i].id, "'> Info </a> </td>",
                             "</tr>"].join(""));
                         $table.append($row);
 

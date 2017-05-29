@@ -33,7 +33,7 @@ public class Order {
     String status;
 
     @Column(name = "CREATED_AT")
-    Instant created_at;
+    Instant createdAt;
 
     @ManyToOne
     @JoinColumn(name = "ID_CLIENT")
@@ -89,12 +89,12 @@ public class Order {
         this.status = status;
     }
 
-    public Instant getCreated_at() {
-        return created_at;
+    public Instant getCreatedAt() {
+        return createdAt;
     }
 
-    public void setCreated_at(Instant created_at) {
-        this.created_at = created_at;
+    public void setCreatedAt(Instant created_at) {
+        this.createdAt = created_at;
     }
 
     public Client getClient() {

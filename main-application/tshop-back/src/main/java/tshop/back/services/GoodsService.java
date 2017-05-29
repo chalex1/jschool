@@ -129,6 +129,7 @@ public class GoodsService {
         transport.setWarranty(goods.getWarranty());
         transport.setPromodescription(goods.getPromodescription());
         transport.setDeleted(goods.getDeleted() == 1);
+        transport.setCategories(getCategoriesIds(goods));
         return transport;
     }
 

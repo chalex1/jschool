@@ -19,7 +19,7 @@
         </div>
 
         <input type="button" class="order-btn btn btn-default" value="Make an order"/>
-        <input type="button" class="cancel-save-btn btn btn-default" value="Return"/>
+        <input type="button" class="cancel-save-btn btn btn-default" value="Back to the Shop"/>
     </div>
 </div>
 

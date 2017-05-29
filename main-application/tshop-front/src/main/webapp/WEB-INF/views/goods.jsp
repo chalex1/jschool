@@ -19,7 +19,8 @@
     <br>
     <br>
     <br>
-    <div class="form-inline">
+
+    <form class="form-inline search-goods-form">
         <div class="form-group">
             <label class="sr-only" for="filterGoodsName">Model</label>
             <input type="text" id="filterGoodsName" class="filter-goods-name form-control" placeholder="Model"/>
@@ -37,8 +38,8 @@
                 <input type="checkbox" class="filler-goods-show-empty"/> In stock
             </label>
         </div>
-        <input type="button" class="find-goods-btn btn btn-default" value="Find"/>
-    </div>
+        <input type="submit" class="find-goods-btn btn btn-default" value="Find"/>
+    </form>
     <br>
 
     <div class="goods"></div>

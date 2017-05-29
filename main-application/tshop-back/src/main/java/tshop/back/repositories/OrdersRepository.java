@@ -15,6 +15,8 @@ import java.util.List;
 public interface OrdersRepository extends JpaRepository<Order, Long> {
 
 
+
+
     @Transactional(readOnly = true)
-    List<Order> findByClient(Client client);
+    List<Order> findByClient(Client client, Sort sort);
 }

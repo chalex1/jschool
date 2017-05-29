@@ -22,7 +22,7 @@
 <jsp:include page="/WEB-INF/parts/menu.jsp"></jsp:include>
 
 <div class="container">
-    <input class="hidden order-id" value="${id}"/>
+    <%--<input class="hidden order-id" value="${id}"/>--%>
     <h3>Choose options:</h3>
     <h4>Payment method</h4>
     <div class="radio">
@@ -38,8 +38,8 @@
             Card
         </label>
     </div>
-    <input type="button" class="pay-by-card btn btn-default disabled" value="Pay by card"/><br><br>
-    <input type="button" class="pay-by-card pay-by-card-sber btn btn-default disabled" value="Pay by sber card"/><br><br>
+    <%--<input type="button" class="pay-by-card btn btn-default disabled" value="Pay by card"/><br><br>--%>
+    <%--<input type="button" class="pay-by-card pay-by-card-sber btn btn-default disabled" value="Pay by sber card"/><br><br>--%>
     <h4>Delivering method</h4>
     <div class="radio">
         <label>
