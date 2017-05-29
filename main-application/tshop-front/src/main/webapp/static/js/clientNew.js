@@ -3,9 +3,14 @@
  */
 (function () {
     var $errorMessageSpan = jQuery("#errorMessage");
+    var pathToGo = jQuery(".path-to-go").val();
+    if(!pathToGo){
+        pathToGo="/goods"
+    }
 
     jQuery(".client-save-btn").click(function () {
         var client = {}, account = {}, address = {};
+        var valid = true;
         client.addressTransport = address;
         client.accountTransport = account;
 
@@ -13,7 +18,14 @@
         account.name = jQuery(".account-name").val();
         account.surname = jQuery(".account-surname").val();
         account.login = jQuery(".account-login").val();
+        if (!formValidator.validate("account-login", account.login, jQuery(".account-login"))) {
+            valid = false;
+        }
+
         account.password = jQuery(".account-password").val();
+        if (!formValidator.validate("account-password", account.password, jQuery(".account-password"))) {
+            valid = false;
+        }
         account.email = jQuery(".account-email").val();
         account.birthday = jQuery(".account-birthday").val();
         account.type = "CLIENT";
@@ -26,7 +38,7 @@
         address.home = jQuery(".address-home").val();
         address.flat = jQuery(".address-flat").val();
 
-        if(account.login&&account.password){
+        if(valid){
             jQuery.ajax({
                 url: ctx + "/data/clients",
                 type: "POST",
@@ -43,8 +55,7 @@
                             "userpassword":data.accountTransport.password
                         },
                         success: function () {
-                            //todo redirect to the proper page
-                            alert("should redirect then ")
+                            window.location.href = ctx + pathToGo;
                         }
                     })
 

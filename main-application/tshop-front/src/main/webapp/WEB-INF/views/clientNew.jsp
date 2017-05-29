@@ -13,65 +13,76 @@
 <body>
 <jsp:include page="/WEB-INF/parts/menu.jsp"></jsp:include>
 
-
+<input class="hidden path-to-go" value="${path}"/>
 <div class="container">
     <div class="col-sm-12 col-lg-6">
         <div class="form-group">
+            <label>Login</label>
+            <input type="text" class="account-login form-control chk-notempty chk-less10"/>
+            <span class="help-block check-account-login"></span>
+        </div>
+        <div class="form-group">
+            <label>Password</label>
+            <input type="text" class="account-password form-control chk-notempty chk-less10"/>
+            <span class="help-block check-account-password"></span>
+        </div>
+        <div class="form-group">
             <label>Name</label>
             <input type="text" class="account-name form-control"/>
+            <span class="help-block"></span>
         </div>
         <div class="form-group">
             <label>Surname</label>
             <input type="text" class="account-surname form-control"/>
-        </div>
-        <div class="form-group">
-            <label>Login</label>
-            <input type="text" class="account-login form-control"/>
-        </div>
-        <div class="form-group">
-            <label>Password</label>
-            <input type="text" class="account-password form-control"/>
+            <span class="help-block"></span>
         </div>
         <div class="form-group">
             <label>Email</label>
             <input type="email" class="account-email form-control"/>
+            <span class="help-block"></span>
         </div>
         <div class="form-group">
             <label>Birthday</label>
             <input type="date" class="account-birthday form-control"/>
+            <span class="help-block"></span>
         </div>
         <div class="form-group">
             <label>Country</label>
-
             <input type="text" class="address-country form-control"/>
+            <span class="help-block"></span>
         </div>
         <div class="form-group">
             <label>City</label>
             <input type="text" class="address-city form-control"/>
+            <span class="help-block"></span>
         </div>
         <div class="form-group">
             <label>Postcode</label>
             <input type="text" class="address-postcode form-control"/>
+            <span class="help-block"></span>
         </div>
         <div class="form-group">
             <label>Street</label>
             <input type="text" class="address-street form-control"/>
+            <span class="help-block"></span>
         </div>
         <div class="form-group">
-            <label> Home</label>
+            <label>Home</label>
             <input type="text" class="address-home form-control"/>
+            <span class="help-block"></span>
         </div>
         <div class="form-group">
             <label>Flat</label>
             <input type="text" class="address-flat form-control"/>
+            <span class="help-block"></span>
         </div>
         <input type="button" class="client-save-btn btn btn-default" value="Save"/>
     </div>
-
 </div>
 
 
 <jsp:include page="/WEB-INF/parts/footer.jsp"></jsp:include>
 <script src="static/js/clientNew.js"></script>
+<script src="static/js/formValidator.js"></script>
 </body>
 </html>

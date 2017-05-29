@@ -18,7 +18,8 @@ public class ClientController {
     }
 
     @RequestMapping(path = "/clientnew",method = RequestMethod.GET)
-    public String clientNew(){
+    public String clientNew(Model model,@RequestParam(name = "path", required = false, defaultValue = "") String pathToGo){
+        model.addAttribute("path", pathToGo);
         return "clientNew";
     }
 }

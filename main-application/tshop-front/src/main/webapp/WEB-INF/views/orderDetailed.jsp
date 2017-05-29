@@ -17,44 +17,45 @@
 <div class="container">
     <input class="hidden order-id" value="${id}"/>
 
+    <div class="col-sm-12 col-lg-6">
+        <div class="form-group">
+            <label>Categories</label>
+            <select class="form-control order-payment-method">
+                <option value="CASH">Cash</option>
+                <option value="CARD">Card</option>
+            </select>
+        </div>
 
-    <div class="form-group">
-        <label>Categories</label>
-        <select class="order-payment-method">
-            <option value="CASH">Cash</option>
-            <option value="CARD">Card</option>
-        </select>
-    </div>
+        <div class="form-group">
+            <label>Delivery method</label>
+            <select class="form-control order-delivery-method">
+                <option value="DELIVERY">Delivery</option>
+                <option value="PICKUP">Pickup</option>
+            </select>
+        </div>
 
-    <div class="form-group">
-        <label>Delivery method</label>
-        <select class="order-delivery-method">
-            <option value="DELIVERY">Delivery</option>
-            <option value="PICKUP">Pickup</option>
-        </select>
-    </div>
-
-    <%--<div class="form-group">--%>
+        <%--<div class="form-group">--%>
         <%--<label>Categories</label>--%>
         <%--<select class="order-payment-status">--%>
-            <%--<option value="NOTPAYED">Not payed</option>--%>
-            <%--<option value="PAYED">Payed</option>--%>
+        <%--<option value="NOTPAYED">Not payed</option>--%>
+        <%--<option value="PAYED">Payed</option>--%>
         <%--</select>--%>
-    <%--</div>--%>
+        <%--</div>--%>
 
 
-    <div class="form-group">
-        <label>Status</label>
-        <select class="order-status">
-            <option value="INIT">INIT</option>
-            <option value="PROCESS">PROCESS</option>
-            <option value="PAID">PAID</option>
-            <option value="DISCARDED">DISCARDED</option>
-        </select>
+        <div class="form-group">
+            <label>Status</label>
+            <select class="form-control order-status">
+                <option value="INIT">INIT</option>
+                <option value="PROCESS">PROCESS</option>
+                <option value="PAID">PAID</option>
+                <option value="DISCARDED">DISCARDED</option>
+            </select>
+        </div>
+
+        <input type="button" class="order-save-btn btn btn-default" value="Save"/>
+        <input type="button" class="goods-rtrn-btn btn btn-default" value="Cancel"/>
     </div>
-
-    <input type="button" class="order-save-btn btn btn-default" value="Save"/>
-    <input type="button" class="goods-rtrn-btn btn btn-default" value="Cancel"/>
 
 
 </div>

@@ -20,12 +20,12 @@
         <input type="password" name="userpassword"/>
         <input type="submit" value="submit" class="btn btn-default"/>
     </form>
-    <h3>or <a href="clientnew"> create a new account</a></h3>
+    <h3>or <a href="clientnew" class="linkOnNewAccount"> create a new account</a></h3>
 
 </div>
 
 <jsp:include page="/WEB-INF/parts/footer.jsp"></jsp:include>
-<script src="static/js/goods.js"></script>
+<script src="static/js/login.js"></script>
 </body>
 </html>
 

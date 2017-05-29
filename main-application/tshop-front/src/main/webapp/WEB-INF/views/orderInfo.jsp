@@ -19,17 +19,17 @@
 
     <div class="col-sm-12 col-lg-6">
 
-        Your order number is: <div class="order-number"></div>
+        Your order number is: <h4><span class="order-number"></span></h4>
 
-        Status: <div class="order-status"></div>
+        Status: <h4><span class="order-status"></span></h4>
 
-        Delivering method: <div class="order-delivery"></div>
+        Delivering method: <h4><span class="order-delivery"></span></h4>
 
-        Address: <div class="order-address"></div>
+        Address: <h4><span class="order-address"></span></h4>
 
-        Goods: <div class="order-goods"></div>
+        Goods: <h4><span class="order-goods"></span></h4>
 
-        Total price: <div class="order-price"></div>
+        Total price: <h4><span class="order-price"></span></h4>
 
         <input type="button" class="ok-btn btn btn-default" value="Ok"/>
         <%--<input type="button" class="goods-rtrn-btn btn btn-default" value="Cancel"/>--%>

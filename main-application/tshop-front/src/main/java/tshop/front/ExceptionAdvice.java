@@ -22,7 +22,7 @@ public class ExceptionAdvice {
     public String handleUnprocessibleEntity(Exception ex, HttpServletResponse response) {
         logger.info(ex.getMessage());
         response.setStatus(422);// WebDAV extension 422 Unprocessable Entity
-        return "Unprocessable Entity. Check the documentation for mor information.";
+        return ex.getClass().getName()+"! Check the documentation for mor information.";
     }
 
     @ExceptionHandler(Exception.class)

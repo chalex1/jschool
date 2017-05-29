@@ -3,8 +3,6 @@
  */
 
 (function () {
-
-
     var errorMessageSpan = jQuery("#errorMessage");
     var $categorySelectDiv = jQuery(".goods-categories");
 
